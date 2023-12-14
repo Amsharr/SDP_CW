@@ -60,8 +60,8 @@
                 <button name="Add" type="Add" class="btn btn-success">Add user</button>
             </a>            
         </div>
-        </a>          
-        <table class="table">
+        <br>          
+        <table class="table table-bordered">
             <thead>
                 <tr>
                 <th >user Id</th>

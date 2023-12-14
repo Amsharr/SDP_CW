@@ -65,7 +65,7 @@
           <p><b>InstituitionId 1 is for Wildlife and 2 for Forest</b><p>
         </div>
         <br>
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                 <th >Officer Id</th>
