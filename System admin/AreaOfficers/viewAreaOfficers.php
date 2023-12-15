@@ -61,18 +61,15 @@
             </a>            
         </div>
         <br>
-        <div>
-          <p><b>InstituitionId 1 is for Wildlife and 2 for Forest</b><p>
-        </div>
-        <br>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                <th >Officer Id</th>
-                <th >First Name</th>
-                <th >Last Name</th>
-                <th >Role</th>
-                <th >Instituition Id</th>
+                <th>Officer Id</th>
+                <th>Instituition Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>contact no.</th>
+                <th>Position</th>               
                 <th>Username</th> 
                 <th>Password</th>   
                 <th>Operations</th>     
@@ -86,20 +83,23 @@
                 if($result){
                 while($row=mysqli_fetch_assoc($result)){
                     $id=$row['officerId'];
+                    $institutionId=$row['institutionId'];
                     $firstName=$row['firstName'];
                     $lastName=$row['lastName'];
-                    $role=$row['role'];
-                    $instituitionId=$row['instituitionId'];
+                    $contactNo=$row['contactNo'];
+                    $position=$row['position'];                    
                     $username=$row['username'];
                     $password=$row['password'];
+                    
                     echo'<tr>
                     <td scope="row">'.$id.'</td>
+                    <td>'.$institutionId.'</td>
                     <td>'.$firstName.'</td>
                     <td>'.$lastName.'</td>
-                    <td>'.$role.'</td>
-                    <td>'.$instituitionId.'</td>
+                    <td>'.$contactNo.'</td>
+                    <td>'.$position.'</td>
                     <td>'.$username.'</td>
-                    <td>'.$password.'</td>
+                    <td>'.str_repeat('*', strlen($password)).'</td>
                     <td>
                     <button class="btn btn-primary" name="edit"><a href="editOfficer.php?updateId='.$id.'" class="text-light">EDIT</a></button>
                     <button class="btn btn-danger" name="delete"><a href="deleteOfficer.php?deleteid='.$id.'" class="text-light">DELETE</a></button>                  
