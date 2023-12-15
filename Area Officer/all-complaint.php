@@ -8,8 +8,6 @@ header('location:index.php');
 else{
 date_default_timezone_set('Asia/Kolkata');// change according timezone
 $currentTime = date( 'd-m-Y h:i:s A', time () );
-
-
 ?>
 
 <!doctype html>
@@ -23,22 +21,9 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
     <link rel="stylesheet" href="../CSS/systemAdmin/homepage.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-    <!-- vendor css -->
-    <link rel="stylesheet" href="assets/css/style.css">
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
-    
-    <script language="javascript" type="text/javascript">
-    var popUpWin=0;
-    function popUpWindow(URLStr, left, top, width, height)
-    {
-         if(popUpWin)
-        {
-            if(!popUpWin.closed) popUpWin.close();
-        }
-        popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width='+600+',height='+600+',left='+left+', top='+top+',screenX='+left+',screenY='+top+'');
-    }
 
-    </script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    
 </head>
 <nav class="navbar bg-success" data-bs-theme="dark">
   <div class="container-fluid">
@@ -62,10 +47,10 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
                               <i class="fa-solid fa-id-card-clip"></i> <span class="ms-1 d-none d-sm-inline">Complaints</span></a>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="./complainers/viewComplainers.php"><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
+                              <li><a class="dropdown-item" href="all-complaint.php"><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
                               
-                              <li><a class="dropdown-item" href="./AreaOfficers/viewAreaOfficers.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
-                              <li><a class="dropdown-item" href="./InvestigationOfficer/viewInvestigationOfficers.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
+                              <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
+                              <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
                               <li><a class="dropdown-item" href="./InvestigationOfficer/viewInvestigationOfficers.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
 
                             </ul>
@@ -82,32 +67,15 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
                       </ul>                
                       <hr>
                   </div>
-              </div>              
-                <div class="row justify-content-center">
-                    <div class="col py-3">
-                      <h1>Dashboard</h1>
-                        <!-- [ Main Content ] start -->
-        <div class="row">
-          
-          <!-- [ form-element ] start -->
-          <div class="col-sm-12">
-              <div class="card">
-               
-                  <div class="card-body">
-                      <h5>View All Complaints</h5>
-                      <hr>
-                     
-                    <div class="row">
-                          <div class="col-xl-12">
-              <div class="card">
-                 
-                  <div class="card-body table-border-style">
-                      <div class="table-responsive">
-                          <table class="table table-striped">
-                              <thead>
+              </div>                              
+                <div class="col py-3">
+                  <h1>Dashboard</h1>
+                    <table class="table table-striped">
+                      <thead>
                                       <tr><th>S.No</th>
                                           <th>Complaint No</th>
                                           <th>Complainant Name</th>
+                                          <th>institution </th>
                                           <th>Date</th>
                                           <th>Status</th>
                                           <th>Action</th>
@@ -116,15 +84,16 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
                               <tbody>
                                   <?php 
 
-$query=mysqli_query($con,"select complains.*,complainers.firstName as name from complains join complainers on complainers.userId=complains.userId");
-$cnt=1;
-while($row=mysqli_fetch_array($query))
-{
-?>  
+                                      $query=mysqli_query($con,"select complains.*,complainers.firstName as name from complains join complainers on complainers.userId=complains.userId ");
+                                      $cnt=1;
+                                      while($row=mysqli_fetch_array($query))
+                                      {
+                                      ?>  
                                       <tr>
                                           <td><?php echo htmlentities($cnt);?></td>
                                           <td><?php echo htmlentities($row['complainId']);?></td>
                                           <td><?php echo htmlentities($row['name']);?></td>
+                                          <td><?php echo htmlentities($row['institutionId']);?></td>
                                           <td> <?php echo htmlentities($row['dateTime']);?></td>
                                          <td>
                                               <?php $status=$row['status'];
@@ -138,10 +107,12 @@ while($row=mysqli_fetch_array($query))
 </td>
                                          
 
-<td>   <a href="complaint-details.php?cid=<?php echo htmlentities($row['complaintNumber']);?>" class="btn btn-primary"> View Details</a> 
-                                          </td>
+<td>
+    <a href="complaint-details.php?cid=<?php echo htmlentities($row['complainId']);?>" class="btn btn-primary">A View Details</a> 
+</td>
+</td>
 
-                                      </td>
+                                      
                                           
 
                                       </tr>
@@ -149,8 +120,26 @@ while($row=mysqli_fetch_array($query))
                                  
                               </tbody>
                           </table>
+                        <!-- [ Main Content ] start -->
+        <!-- <div class="row">
+          
+          [ form-element ] start -->
+          <div class="col-sm-12">
+              <div class="">
+               
+                  <div class="">
+                      <h5>View All Complaints</h5>
+                      <hr>
+                     
+                    <div class="row">
+                          <div class="col-xl-12">
+              <div class="">
+                 
+                  <!-- <div class="card-body table-border-style">
+                      <div class="table-responsive">
+                          
                       </div>
-                  </div>
+                  </div> -->
               </div>
           </div>
                          
@@ -161,7 +150,7 @@ while($row=mysqli_fetch_array($query))
         
           </div>
           <!-- [ form-element ] end -->
-      </div>
+      </div> 
       </div>
       
         <!-- [ Main Content ] end -->
@@ -172,9 +161,7 @@ while($row=mysqli_fetch_array($query))
           </div>
       </div> 
       <!-- Required Js -->
-    <script src="assets/js/vendor-all.min.js"></script>
-    <script src="assets/js/plugins/bootstrap.min.js"></script>
-    <script src="assets/js/pcoded.min.js"></script>          
+             
   </body>
 </html>
 <?php } ?>

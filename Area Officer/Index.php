@@ -31,8 +31,8 @@
                             </button>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="all-complaint.php"><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
-                              <li><a class="dropdown-item" href="./AreaOfficers/viewAreaOfficers.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
-                              <li><a class="dropdown-item" href="./InvestigationOfficer/viewInvestigationOfficers.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
+                              <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
+                              <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
                               <li><a class="dropdown-item" href="./InvestigationOfficer/viewInvestigationOfficers.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
 
                             </ul>
