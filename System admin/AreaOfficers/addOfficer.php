@@ -10,7 +10,7 @@
         $username=$_POST['username'];
         $password=$_POST['password'];
 
-		$query = "INSERT INTO areaofficers VALUES('', '$firstName', '$lastName', '$role', '$instituitionId', '$username', '$password')";
+		$query = "INSERT INTO areaofficers VALUES('', '$firstName', '$lastName', '$role', '$username', '$password', '$instituitionId')";
 		mysqli_query($conn, $query);
 		echo '<script>
       	window.location.href ="viewAreaOfficers.php";
@@ -90,8 +90,12 @@
                     </div>
                     <!-- instituitionId -->
                     <div class="mb-3">
-                        <label> Instituition Id:</label>
-                        <input type="number" name="instituitionId" min=1 max=2 class="form-control" placeholder="1 for Wildlife | 2 for Forest" required>
+                      <label> Instituition:</label>
+                      <select class="form-select" aria-label="Default select example" name="instituitionId" required>
+                        <option selected disabled>Select an instituition</option>
+                        <option value="1">Wildlife</option>
+                        <option value="2">Forest</option>
+                      </select>
                     </div>
                     <!-- Username -->
                     <div class="mb-3">
