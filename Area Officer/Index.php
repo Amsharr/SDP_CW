@@ -45,7 +45,7 @@
                             </button>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="investigation-complaint.php"><i class="fa-solid fa-tree"></i><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
-                              <li><a class="dropdown-item" href="all-complaint.php"><i class="fa-solid fa-paw"></i><span class="ms-1 d-none d-sm-inline">Wildlife</span></a></li>
+                              <li><a class="dropdown-item" href="assign-complain.php"><i class="fa-solid fa-paw"></i><span class="ms-1 d-none d-sm-inline">Assign Complain</span></a></li>
                             </ul>
                           </div>     
                       </ul>                
