@@ -113,7 +113,7 @@
                     </div>
                     <div class="mb-3">
                       <label>Position:</label>
-                      <select class="form-select" name="position" required value=<?php echo $position;?>>
+                      <select class="form-select" name="position" required>
                         <option selected disabled>Select position</option>
                         <option value="Junior" <?php echo ($position == 'Junior') ? 'selected' : ''; ?>>Junior</option>
                         <option value="Senior" <?php echo ($position == 'Senior') ? 'selected' : ''; ?>>Senior</option>

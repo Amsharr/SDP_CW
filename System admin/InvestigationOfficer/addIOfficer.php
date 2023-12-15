@@ -1,16 +1,16 @@
 <?php
 	require('C:/xampp/htdocs/SDP_CW/Config/connection.php');
 
-	if(isset($_POST["submit"])){
-        
+	if(isset($_POST["submit"])){ 
+        $institutionId=$_POST['institutionId'];
         $firstName=$_POST['firstName'];
         $lastName=$_POST['lastName'];
-        $role=$_POST['role'];
-        $instituitionId=$_POST['instituitionId'];
+        $contactNo=$_POST['contactNo'];
+        $position=$_POST['position'];                    
         $username=$_POST['username'];
         $password=$_POST['password'];
 
-		$query = "INSERT INTO investigationofficers VALUES('', '$firstName', '$lastName', '$role', '$username', '$password', '$instituitionId')";
+		$query = "INSERT INTO investigationofficers VALUES('', '$institutionId','$firstName', '$lastName', '$contactNo', '$position', '$username', '$password')";
 		mysqli_query($conn, $query);
 		echo '<script>
       	window.location.href ="viewInvestigationOfficers.php";
@@ -73,26 +73,39 @@
             <div class="col py-3">
                 <form method="post">
                     <div class="container">
+                    <!-- instituitionId -->
+                    <div class="mb-3">
+                      <label> Instituition:</label>
+                      <select class="form-select" aria-label="Default select example" name="institutionId" required>
+                        <option selected disabled>Select an instituition</option>
+                        <option value="1">Wildlife</option>
+                        <option value="2">Forest</option>
+                      </select>
+                    </div>
                     <!-- First Name -->
                     <div class="mb-3">
-                        <label> First Name: </label>
+                        <label>First Name:</label>
                         <input type="text" name="firstName" class="form-control" autofocus="on" required>                     
                     </div>
                     <!-- Last Name -->
                     <div class="mb-3">
-                        <label> Last Name:</label>
+                        <label>Last Name:</label>
                         <input type="text" name="lastName" class="form-control" required>
                     </div>
-                    <!-- Mobile No. -->
+                    <!-- contact No. -->
                     <div class="mb-3">
-                        <label> Role:</label>
-                        <input type="text" name="role" class="form-control" autofocus="on" required>                     
+                        <label>Contact No.:</label>
+                        <input type="text" name="contactNo" max=12 class="form-control" autofocus="on" required>                     
                     </div>
-                    <!-- instituitionId -->
                     <div class="mb-3">
-                        <label> Instituition Id:</label>
-                        <input type="number" name="instituitionId" min=1 max=2 class="form-control" placeholder="1 for Wildlife | 2 for Forest" required>
-                    </div>
+                      <label>Position:</label>
+                      <select class="form-select" name="position" required>
+                        <option selected disabled>Select position</option>
+                        <option value="Junior">Junior</option>
+                        <option value="Senior">Senior</option>
+                        <option value="Captain">Captain</option>
+                      </select>
+                    </div>                    
                     <!-- Username -->
                     <div class="mb-3">
                         <label> Username: </label>
@@ -101,7 +114,7 @@
                     <!-- Password -->
                     <div class="mb-3">
                         <label> Password: </label>
-                        <input type="text" name="password" class="form-control" autofocus="on" required>                     
+                        <input type="password" name="password" class="form-control" autofocus="on" required>                     
                     </div>
                     <!-- Add button  -->
                     <div>

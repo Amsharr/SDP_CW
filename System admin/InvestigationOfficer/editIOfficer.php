@@ -5,23 +5,25 @@
     $sql="SELECT * from `investigationofficers` where officerId=$id";
     $result=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($result);
+    $institutionId=$row['institutionId'];
     $firstName=$row['firstName'];
     $lastName=$row['lastName'];
-    $role=$row['role'];
-    $instituitionId=$row['instituitionId'];
+    $contactNo=$row['contactNo'];
+    $position=$row['position'];                    
     $username=$row['username'];
     $password=$row['password'];
 
     //edit data 
 	if(isset($_POST["submit"])){
-        $firstName=$_POST['firstName'];
-        $lastName=$_POST['lastName'];
-        $role=$_POST['role'];
-        $instituitionId=$_POST['instituitionId'];
-        $username=$_POST['username'];
-        $password=$_POST['password'];
+    $institutionId=$_POST['institutionId'];
+    $firstName=$_POST['firstName'];
+    $lastName=$_POST['lastName'];
+    $contactNo=$_POST['contactNo'];
+    $position=$_POST['position'];                    
+    $username=$_POST['username'];
+    $password=$_POST['password'];
 
-		$query ="UPDATE `areaofficers` set officerId=$id,firstName='$firstName',lastName='$lastName',role='$role',instituitionId='$instituitionId',username='$username',password='$password' where officerId=$id";
+		$query ="UPDATE `investigationofficers` set officerId=$id, institutionId='$institutionId',firstName='$firstName',lastName='$lastName',position='$position',contactNo='$contactNo',username='$username',password='$password' where officerId=$id";
 		mysqli_query($conn, $query);
 		echo '<script>
         window.location.href ="viewInvestigationOfficers.php";
@@ -84,35 +86,49 @@
             <div class="col py-3">
             <form method="post">
                     <div class="container">
+                    <!-- instituitionId -->
+                    <div class="mb-3">
+                      <label> Instituition:</label>
+                      <select class="form-select" aria-label="Default select example" required name="institutionId" >
+                        <option selected disabled>Select an instituition</option>
+                        <option value="1" <?php echo ($institutionId == 1) ? 'selected' : ''; ?>>Wildlife</option>
+                        <option value="2" <?php echo ($institutionId == 2) ? 'selected' : ''; ?>>Forest</option>
+                      </select>
+                      
+                    </div>
                     <!-- First Name -->
                     <div class="mb-3">
                         <label> First Name: </label>
-                        <input type="text" name="firstName" class="form-control" autofocus="on" value=<?php echo $firstName;?> required>                     
+                        <input type="text" name="firstName" class="form-control" autofocus="on" required value=<?php echo $firstName;?>>                     
                     </div>
                     <!-- Last Name -->
                     <div class="mb-3">
                         <label> Last Name:</label>
-                        <input type="text" name="lastName" class="form-control" value=<?php echo $lastName;?> required>
+                        <input type="text" name="lastName" class="form-control" required value=<?php echo $lastName;?> >
                     </div>
-                    <!-- Role -->
+                    <!-- contact No. -->
                     <div class="mb-3">
-                        <label> Role:</label>
-                        <input type="text" name="role" class="form-control" autofocus="on" value=<?php echo $role;?> required>                     
+                        <label>Contact No.:</label>
+                        <input type="text" name="contactNo" max=12 class="form-control" autofocus="on" required value=<?php echo $contactNo;?>>                     
                     </div>
-                    <!-- instituitionId -->
                     <div class="mb-3">
-                        <label> Instituition Id:</label>
-                        <input type="number" name="instituitionId" min=1 max=2 class="form-control" placeholder="1 for Wildlife | 2 for Forest" value=<?php echo $instituitionId;?> required>
-                    </div>
+                      <label>Position:</label>
+                      <select class="form-select" name="position" required>
+                        <option selected disabled>Select position</option>
+                        <option value="Junior" <?php echo ($position == 'Junior') ? 'selected' : ''; ?>>Junior</option>
+                        <option value="Senior" <?php echo ($position == 'Senior') ? 'selected' : ''; ?>>Senior</option>
+                        <option value="Captain" <?php echo ($position == 'Captain') ? 'selected' : ''; ?>>Captain</option>
+                      </select>
+                    </div>    
                     <!-- Username -->
                     <div class="mb-3">
                         <label> Username: </label>
-                        <input type="text" name="username" class="form-control" autofocus="on" value=<?php echo $username;?> required>                     
+                        <input type="text" name="username" class="form-control" autofocus="on" required value=<?php echo $username;?>>                     
                     </div>
                     <!-- Password -->
                     <div class="mb-3">
                         <label> Password: </label>
-                        <input type="text" name="password" class="form-control" autofocus="on" value=<?php echo $password;?> required>                     
+                        <input type="password" name="password" class="form-control" autofocus="on" required value=<?php echo $password;?> >                     
                     </div>
                     <!-- update button  -->
                     <div>
