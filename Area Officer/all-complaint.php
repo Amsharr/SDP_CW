@@ -84,17 +84,17 @@ include('../Config/connection.php');
                               <tbody>
                                   <?php 
 
-                                      $query=mysqli_query($con,"select complains.*,complainers.firstName as name from complains join complainers on complainers.userId=complains.userId ");
+                                      $query=mysqli_query($con,"select complaints.*,complainers.firstName as name from complaints join complainers on complainers.userId=complaints.userId ");
                                       $cnt=1;
                                       while($row=mysqli_fetch_array($query))
                                       {
                                       ?>  
                                       <tr>
                                           <td><?php echo htmlentities($cnt);?></td>
-                                          <td><?php echo htmlentities($row['complainId']);?></td>
+                                          <td><?php echo htmlentities($row['complaintId']);?></td>
                                           <td><?php echo htmlentities($row['name']);?></td>
                                           <td><?php echo htmlentities($row['institutionId']);?></td>
-                                          <td> <?php echo htmlentities($row['dateTime']);?></td>
+                                          <td> <?php echo htmlentities($row['date']);?></td>
                                          <td>
                                               <?php $status=$row['status'];
                                               if($status==''): ?>
@@ -108,7 +108,7 @@ include('../Config/connection.php');
                                          
 
 <td>
-    <a href="complaint-details.php?cid=<?php echo htmlentities($row['complainId']);?>" class="btn btn-primary">A View Details</a> 
+    <a href="complaint-details.php?cid=<?php echo htmlentities($row['complaintId']);?>" class="btn btn-primary">A View Details</a> 
 </td>
 </td>
 

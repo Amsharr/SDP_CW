@@ -120,19 +120,19 @@ include('../Config/connection.php');
                                                         <tbody>
                                                         <?php $st='closed';
                                                         $cid=$_GET['cid'];
-                        $query=mysqli_query($con,"select complains.*,complainers.firstName as name, institutions.type as instname from complains join complainers on complainers.userId=complains.userId join institutions on institutions.institutionId=complains.institutionId where complains.complainId ='$cid'");
+                        $query=mysqli_query($con,"select complaints.*,complainers.firstName as name, institutions.type as instname from complaints join complainers on complainers.userId=complaints.userId join institutions on institutions.institutionId=complains.institutionId where complaints.complaintId ='$cid'");
                         while($row=mysqli_fetch_array($query))
                         {
 
                         ?>                                  
                                                                 <tr>
                                                                     <td><b>Complaint Number</b></td>
-                                                                    <td><?php echo htmlentities($row['complainId']);?></td>
+                                                                    <td><?php echo htmlentities($row['complaintId']);?></td>
                                                                     <td><b>Complainant Name</b></td>
                                                                     <td> <?php echo htmlentities($row['name']);?></td>
                                                                    
                                                                     <td><b>Reg Date</b></td>
-                                                                    <td><?php echo htmlentities($row['dateTime']);?>
+                                                                    <td><?php echo htmlentities($row['date']);?>
                                                                     </td>
                                                                 </tr>
 
@@ -145,7 +145,7 @@ include('../Config/connection.php');
                                                                 <tr>
                                                                     <td><b>Complaint Details </b></td>
                                                                     
-                                                                    <td colspan="5"> <?php echo htmlentities($row['Description']);?></td>
+                                                                    <td colspan="5"> <?php echo htmlentities($row['description']);?></td>
                                                                     
                                                                 </tr>
 
@@ -170,7 +170,7 @@ include('../Config/connection.php');
 
 
 
-                        <?php $ret=mysqli_query($con,"select complaintremark.remark as remark,complaintremark.status as sstatus,complaintremark.remarkDate as rdate from complaintremark join complains on complains.complainId=complaintremark.complaintNumber where complaintremark.complaintNumber='$cid'");
+                        <?php $ret=mysqli_query($con,"select complaintremark.remark as remark,complaintremark.status as sstatus,complaintremark.remarkDate as rdate from complaintremark join complaints on complaints.complaintId=complaintremark.complaintNumber where complaintremark.complaintNumber='$cid'");
                         $cnt=1;
                         $count=mysqli_num_rows($ret);
                         if($count): ?>
@@ -201,7 +201,7 @@ include('../Config/connection.php');
                                                                     <?php if($row['status']=="closed"){
 
                                                                         } else {?>
-                        <a href="javascript:void(0);" onClick="popUpWindow('updatecomplaint.php?cid=<?php echo htmlentities($row['complainId']);?>');" title="Update order">
+                        <a href="javascript:void(0);" onClick="popUpWindow('updatecomplaint.php?cid=<?php echo htmlentities($row['complaintId']);?>');" title="Update order">
                                                                     <button type="button" class="btn btn-primary">Take Action</button></td>
                                                                     </a><?php } ?></td>
                                                                     <td colspan="4"> 

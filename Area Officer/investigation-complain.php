@@ -1,4 +1,14 @@
-
+<?php
+// session_start();
+include('../Config/connection.php');
+// if(strlen($_SESSION['aid'])==0)
+//     {   
+// header('location:index.php');
+// }
+// else{
+// // date_default_timezone_set('Asia/Kolkata');// change according timezone
+// // $currentTime = date( 'd-m-Y h:i:s A', time () );
+// ?>
 
 <!doctype html>
 <html lang="en">
@@ -9,6 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="../CSS/systemAdmin/homepage.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
   </head>
   <nav class="navbar bg-success" data-bs-theme="dark">
   <div class="container-fluid">
@@ -52,11 +64,102 @@
                       <hr>
                   </div>
               </div>              
-                <div class="row justify-content-center">
+                
                     <div class="col py-3">
-                        
-                    </div>
-                </div>                  
+                  <h1>Dashboard</h1>
+                    <table class="table table-striped">
+                      <thead>
+                                      <tr><th>S.No</th>
+                                          <th>Complaint No</th>
+                                          <th>Invesitigator Name</th>
+                                          <th>Description </th>
+                                          <th>Date</th>
+                                          <th>Status</th>
+                                          <th>Date</th>
+                                          <th>Remakrs</th>
+                                          <th>View</th>
+                                          <th>Action</th>
+                                      </tr>
+                              </thead>
+                              <tbody>
+                                  <?php 
+
+                                      $query=mysqli_query($con,"select currentcomplaints.*,investigationofficers.firstName as name from currentcomplaints join investigationofficers on investigationofficers.officerId=currentcomplaints.officerId ");
+                                      $cnt=1;
+                                      while($row=mysqli_fetch_array($query))
+                                      {
+                                      ?>  
+                                      <tr>
+                                          <td><?php echo htmlentities($cnt);?></td>
+                                          <td><?php echo htmlentities($row['complaintId']);?></td>
+                                          <td><?php echo htmlentities($row['name']);?></td>
+                                          <td><?php echo htmlentities($row['description']);?></td>
+                                          <td> <?php echo htmlentities($row['date']);?></td>
+                                         <td>
+                                              <?php $status=$row['status'];
+                                              if($status==''): ?>
+                                              <span class="badge badge-danger">Not Processed Yet</span>
+                                          <?php elseif($status=='in process'):?>
+                                           <span class="badge badge-warning">In Process</span>
+                                       <?php elseif($status=='closed'):?>
+                                           <span class="badge badge-success">Closed</span>
+                                       <?php endif;?>
+</td>
+                                         
+
+<td>
+    <a href="complaint-details.php?cid=<?php echo htmlentities($row['complaintId']);?>" class="btn btn-primary">A View Details</a> 
+</td>
+</td>
+
+<td>
+    <a href="assign-complain.php?cid=<?php echo htmlentities($row['complaintId']);?>" class="btn btn-secondary">Assign</a> 
+</td>
+</td>
+
+                                      
+                                          
+
+                                      </tr>
+                                      <?php $cnt=$cnt+1; } ?>
+                                 
+                              </tbody>
+                          </table>
+                        <!-- [ Main Content ] start -->
+        <!-- <div class="row">
+          
+          [ form-element ] start -->
+          <div class="col-sm-12">
+              <div class="">
+               
+                  <div class="">
+                      <h5>View All Complaints</h5>
+                      <hr>
+                     
+                    <div class="row">
+                          <div class="col-xl-12">
+              <div class="">
+                 
+                  <!-- <div class="card-body table-border-style">
+                      <div class="table-responsive">
+                          
+                      </div>
+                  </div> -->
+              </div>
+          </div>
+                         
+                      </div>
+                 
+                  </div>
+              </div>
+        
+          </div>
+          <!-- [ form-element ] end -->
+      </div> 
+      </div>
+      
+        <!-- [ Main Content ] end -->
+                                
           </div>
       </div>           
   </body>
