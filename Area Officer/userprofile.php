@@ -1,11 +1,6 @@
 <?php
 session_start();
 include('../Config/connection.php');
-if(strlen($_SESSION['alogin'])==0)
-  { 
-header('location:index.php');
-}
-else{
 
  ?>
 <script language="javascript" type="text/javascript">
@@ -68,7 +63,7 @@ while($row=mysqli_fetch_array($ret1))
 
       <tr height="50">
       <td><b>State:</b></td>
-      <td><?php echo htmlentities($row['State']); ?></td>
+      <td><?php echo htmlentities($row['state']); ?></td>
     </tr>
     <tr height="50">
       <td><b>Contact:</b></td>
@@ -92,5 +87,3 @@ while($row=mysqli_fetch_array($ret1))
 
 </body>
 </html>
-
-     <?php } ?>

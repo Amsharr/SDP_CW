@@ -1,11 +1,7 @@
 <?php
-session_start();
+
 include('../Config/connection.php');
-if(strlen($_SESSION['alogin'])==0)
-  { 
-header('location:index.php');
-}
-else {
+
   if(isset($_POST['update']))
   {
 $complaintnumber=$_GET['cid'];
@@ -92,4 +88,4 @@ window.print();
 </body>
 </html>
 
-     <?php } ?>
+  
