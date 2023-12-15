@@ -19,16 +19,14 @@ CREATE TABLE complainers (
 -- Create Table: complaints
 CREATE TABLE complaints (
     complaintId INT AUTO_INCREMENT PRIMARY KEY,
+    instituitionId INT,
     userId INT,
-    complainerFirstName VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     location VARCHAR(255) NOT NULL,
     status VARCHAR(255) DEFAULT 'open',
     date DATE NOT NULL,
     FOREIGN KEY (userId) REFERENCES complainers(userId),
-    CONSTRAINT FK_complaints_complainers
-        FOREIGN KEY (userId)
-        REFERENCES complainers(userId)
+    FOREIGN KEY (instituitionId) REFERENCES institutions(institutionId)
 );
 
 -- Create Table: areaOfficers
@@ -39,17 +37,21 @@ CREATE TABLE areaOfficers (
     lastName VARCHAR(255) NOT NULL,
     contactNo VARCHAR(15) NOT NULL,
     position VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     FOREIGN KEY (instituitionId) REFERENCES institutions(institutionId)
 );
 
 -- Create Table: investigationOfficers
 CREATE TABLE investigationOfficers (
     officerId INT AUTO_INCREMENT PRIMARY KEY,
+    instituitionId INT,
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
     contactNo VARCHAR(15) NOT NULL,
     position VARCHAR(255) NOT NULL,
-    instituitionId INT,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,    
     FOREIGN KEY (instituitionId) REFERENCES institutions(institutionId)
 );
 
