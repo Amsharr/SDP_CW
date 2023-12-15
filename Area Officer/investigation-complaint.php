@@ -111,6 +111,10 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
     <a href="complaint-details.php?cid=<?php echo htmlentities($row['complainId']);?>" class="btn btn-primary">A View Details</a> 
 </td>
 </td>
+<td>
+    <a href="investigation-complaint.php?cid=<?php echo htmlentities($row['complainId']);?>" class="btn btn-primary">Assign Complaint</a> 
+</td>
+</td>
 
                                       
                                           

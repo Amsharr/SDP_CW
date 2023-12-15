@@ -28,6 +28,8 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
     </div>
   </div>
 </nav>
+    <link rel="stylesheet" href="assets/css/style.css">
+
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
@@ -47,7 +49,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
                               <li><a class="dropdown-item" href="all-complaint.php"><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
                               <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
                               <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
-                              <li><a class="dropdown-item" href="./InvestigationOfficer/viewInvestigationOfficers.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
+                              <li><a class="dropdown-item" href="closed-complaint.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
 
                             </ul>
                           </div>      
@@ -66,47 +68,108 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
               </div>              
                 <div class="row justify-content-center">
                     <div class="col py-3">
-                      <h1>Dashboard</h1>
-                        <div class="dashboardItems">
-                            <div class="card" style="width: 18rem;">
-                                <img src="../img/systemAdmin/Wildlife.jpg" class="card-img-top" alt="wildlife image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Wildlife Complaints</h5>
-                                    <p class="card-text"> Click on the below button to view the complaints for the Wildlife institution</p>
-                                    <a href="./WildlifeComplaints/viewWildlifeComplaints.php" class="btn btn-warning"><i class="fa-solid fa-arrow-right"></i><span class="ms-1 d-none d-sm-inline">Go to Complaints</span></a>
-                                </div>
-                            </div>
+                      <!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Closed Complaints</h5>
                         </div>
-                        <div class="dashboardItems">
-                            <div class="card" style="width: 18rem;">
-                                <img src="../img/systemAdmin/Forest.jpg" class="card-img-top" alt="Forest image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Forest Complaints</h5>
-                                    <p class="card-text">Click on the below button to view the complaints for the Forest institution.</p>
-                                    <a href="./ForestComplaints/viewForestComplaints.php" class="btn btn-success"><i class="fa-solid fa-arrow-right"></i><span class="ms-1 d-none d-sm-inline">Go to Complaints</span></a>
-                                </div>
-                            </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="dashboard.php"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="closed-complaint.php">Closed Complaints</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+          
+            <!-- [ form-element ] start -->
+            <div class="col-sm-12">
+                <div class="card">
+                 
+                    <div class="card-body">
+                        <h5>View Closed Complaints</h5>
+                        <hr>
+                       
+                      <div class="row">
+                            <div class="col-xl-12">
+                <div class="card">
+                   
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                        <tr><th>S.No</th>
+											<th>Complaint No</th>
+											<th>Complainant Name</th>
+											<th>Reg Date</th>
+											<th>Status</th>
+											<th>Action</th>
+										</tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+$st='closed';
+$query=mysqli_query($con,"select complains.*,complainers.firstName as name from complains join complainers on complainers.userId=complains.userId where complains.status='$st'");
+$cnt=1;
+while($row=mysqli_fetch_array($query))
+{
+?>  
+                                        <tr>
+                                            <td><?php echo htmlentities($cnt);?></td>
+                                            <td><?php echo htmlentities($row['complainId']);?></td>
+                                            <td><?php echo htmlentities($row['name']);?></td>
+                                            <td> <?php echo htmlentities($row['dateTime']);?></td>
+                                        
+                                                                                   <td>
+                                                <?php $status=$row['status'];
+                                                if($status==''): ?>
+                                                <span class="badge badge-danger">Not Processed Yet</span>
+                                            <?php elseif($status=='in process'):?>
+                                             <span class="badge badge-warning">In Process</span>
+                                         <?php elseif($status=='closed'):?>
+                                             <span class="badge badge-success">Closed</span>
+                                         <?php endif;?>
+</td>
+
+<td>   <a href="complaint-details.php?cid=<?php echo htmlentities($row['complaiId']);?>" class="btn btn-primary"> View Details</a> 
+											</td>
+
+                                        </td>
+                                            
+
+                                        </tr>
+                                        <?php $cnt=$cnt+1; } ?>
+                                   
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="dashboardItems">
-                            <div class="card" style="width: 18rem;">
-                                <img src="../img/systemAdmin/users.jpg" class="card-img-top" alt="users image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Users</h5>
-                                    <p class="card-text">Click on the below button to view and manage the Users. </p>
-                                    <div class="dropdown mt-3">
-                                      <br>
-                                      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                        <i class="fa-solid fa-id-card-clip"></i> <span class="ms-1 d-none d-sm-inline">Users</span></a>
-                                      </button>
-                                      <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="./complainers/viewComplainers.php"><i class="fa-solid fa-person"></i> <span class="ms-1 d-none d-sm-inline">Complainers</span></a></li>
-                                        <li><a class="dropdown-item" href="./AreaOfficers/viewAreaOfficers.php"><i class="fa-solid fa-person-military-to-person"></i><span class="ms-1 d-none d-sm-inline">Area Officers</span></a></li>
-                                        <li><a class="dropdown-item" href="./InvestigationOfficer/viewInvestigationOfficers.php"><i class="fa-solid fa-person-military-pointing"></i><span class="ms-1 d-none d-sm-inline"> Investigation Offiers</span></a></li>
-                                      </ul>
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                </div>
+            </div>
+                           
                         </div>
+                   
+                    </div>
+                </div>
+          
+            </div>
+            <!-- [ form-element ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+
+    </div>
+</section>
+                         
                     </div>
                 </div>                  
           </div>
