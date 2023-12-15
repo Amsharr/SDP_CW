@@ -100,10 +100,11 @@
                         <input type="text" name="role" class="form-control" autofocus="on" value=<?php echo $role;?> required>                     
                     </div>
                     <!-- instituitionId -->
-                    <div class="mb-3">
-                        <label> Instituition Id:</label>
-                        <input type="number" name="instituitionId" min=1 max=2 class="form-control" placeholder="1 for Wildlife | 2 for Forest" value=<?php echo $instituitionId;?> required>
-                    </div>
+                    <select class="form-select" aria-label="Default select example" name="instituitionId" required>
+                          <option selected disabled>Select an instituition</option>
+                          <option value="1">Wildlife</option>
+                          <option value="2">Forest</option>
+                    </select>
                     <!-- Username -->
                     <div class="mb-3">
                         <label> Username: </label>
