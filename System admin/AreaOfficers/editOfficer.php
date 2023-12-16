@@ -93,8 +93,7 @@
                         <option selected disabled>Select an instituition</option>
                         <option value="1" <?php echo ($institutionId == 1) ? 'selected' : ''; ?>>Wildlife</option>
                         <option value="2" <?php echo ($institutionId == 2) ? 'selected' : ''; ?>>Forest</option>
-                      </select>
-                      
+                      </select>                      
                     </div>
                     <!-- First Name -->
                     <div class="mb-3">

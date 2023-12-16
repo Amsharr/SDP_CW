@@ -54,47 +54,50 @@
         </div>  
         <div class="col py-3">
           <h3>Forest Complaints details</h3>
-        <!-- <div>
+        <div>
             <a href="addForestComplaint.php">
                 <button name="Add" type="Add" class="btn btn-success">Add complaint</button>
             </a>            
-        </div> -->
+        </div>
         <br>
         <table class="table table-bordered">
           <thead>
                 <tr>
                 <th >Complaint Id</th>
-                <th >User Id</th>
                 <th >Institution Id</th>
+                <th >User Id</th>                
                 <th >Description</th>
+                <th>Location</th>
                 <th>Status</th> 
-                <th>Date & Time</th>   
+                <th>Date</th>   
                 <th>Operations</th>     
                 </tr>
             </thead>
             <tbody>
 
                 <?php
-                $sql="Select * from `complains` WHERE institutionId=2";
+                $sql="Select * from `complaints` WHERE institutionId=2";
                 $result=mysqli_query($conn,$sql); 
                 if($result){
                 while($row=mysqli_fetch_assoc($result)){
-                    $complainId=$row['complainId'];
+                    $complaintId=$row['complaintId'];
                     $userId=$row['userId'];
                     $institutionId=$row['institutionId'];
-                    $Description=$row['Description'];
+                    $description=$row['description'];
+                    $location=$row['location'];
                     $status=$row['status'];
-                    $dateTime=$row['dateTime'];
+                    $date=$row['date'];
                     echo'<tr>
-                    <td scope="row">'.$complainId.'</td>
+                    <td scope="row">'.$complaintId.'</td>
                     <td>'.$userId.'</td>
                     <td>'.$institutionId.'</td>
-                    <td>'.$Description.'</td>
+                    <td>'.$description.'</td>
+                    <td>'.$location.'</td>
                     <td>'.$status.'</td>
-                    <td>'.$dateTime.'</td>
+                    <td>'.$date.'</td>
                     <td>
-                    <button class="btn btn-primary" name="edit"><a href="editComplaint.php?updateId='.$complainId.'" class="text-light">EDIT</a></button>
-                    <button class="btn btn-danger" name="delete"><a href="deleteComplaint.php?deleteid='.$complainId.'" class="text-light">DELETE</a></button>                  
+                    <button class="btn btn-primary" name="edit"><a href="editComplaint.php?updateId='.$complaintId.'" class="text-light">EDIT</a></button>
+                    <button class="btn btn-danger" name="delete"><a href="deleteComplaint.php?deleteid='.$complaintId.'" class="text-light">DELETE</a></button>                  
                     </td>                           
                     </tr>';
                 }
