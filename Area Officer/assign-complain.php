@@ -1,18 +1,19 @@
 <?php
 
 //error_reporting(0);
+session_start();
 include('../Config/connection.php');
 
 if(isset($_POST['submit']))
 {
-$complaintId=$_POST['complaints'];
+$complaintId=$_POST['complaintId'];
 $officerId=$_POST['investigationofficers'];
-$appdate=$_POST['appdate'];
-$description=$_POST['complaints'];
-$query=mysqli_query($con,"insert into currentcomplaints(complaintId, officerId, description,date) values('$complaintId','$officerId','$appdate','$description')");
+$description=$_POST['description'];
+$date=$_POST['date'];
+$query=mysqli_query($con,"insert into currentcomplaints(complaintId, officerId, description,date) values('$complaintId','$officerId','$description','$date')");
 	if($query)
 	{
-		echo "<script>alert('Your assigned complaint successfuly');</script>";
+		
 	}
 
 
@@ -29,10 +30,25 @@ $query=mysqli_query($con,"insert into currentcomplaints(complaintId, officerId, 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="../CSS/systemAdmin/homepage.css">
+    <!-- flatpickr CSS -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<!-- flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-    <link rel="stylesheet" href="assets/css/style.css">
+<!-- flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script>
+    $(document).ready(function () {
+        flatpickr(".datepicker", {
+            dateFormat: "Y-m-d",
+            required: true,
+        });
+    });
+</script>
   </head>
   <nav class="navbar bg-success" data-bs-theme="dark">
   <div class="container-fluid">
@@ -89,14 +105,17 @@ $query=mysqli_query($con,"insert into currentcomplaints(complaintId, officerId, 
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-10">
-                            	<?php if(isset($_POST['submit']))
-{?>
-                                    <div class="alert alert-success">
-                                        <button type="button" class="close" data-dismiss="alert">×</button>
-                                    <strong>Well done!</strong> <?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?>
-                                    </div>
+                           <div class="col-md-10">
+                          <?php   	if (isset($_POST['submit'])) {
+    ?>
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Well done!</strong>
+        <?php echo isset($_SESSION['msg']) ? htmlentities($_SESSION['msg']) : ''; ?>
+        <?php echo htmlentities($_SESSION['msg'] = ""); ?>
+    </div>
 <?php } ?>
+
 
 
                                     <?php if(isset($_GET['del']))
@@ -109,7 +128,60 @@ $query=mysqli_query($con,"insert into currentcomplaints(complaintId, officerId, 
                                     <br />
                                 <form method="post" name="investigationofficers">
 
-                                <div class="form-group">
+                                    <div class="form-group">
+    <label for="complaints">Complaint ID</label>
+    <input type="text" name="complaintId" class="form-control" id="complaintId" readonly>
+
+    <?php
+    $st = 'closed';
+    if (isset($_GET['cid'])) {
+        $cid = $_GET['cid'];
+        $query = mysqli_query($con, "SELECT * FROM complaints WHERE complaintId ='$cid'");
+        if ($query) {
+            while ($row = mysqli_fetch_array($query)) {
+                ?>
+                <script>
+                    // Update the value of the read-only input field using JavaScript
+                    document.getElementById("complaintId").value = "<?php echo $row['complaintId']; ?>";
+                </script>
+                <?php
+            }
+        } else {
+            echo "Query failed: " . mysqli_error($con);
+        }
+    } else {
+        echo "Complaint ID not set.";
+    }
+    ?>
+</div>
+
+<div class="form-group">
+    <label for="complaints">Description</label>
+    <input type="text" name="description" class="form-control" id="description" readonly>
+
+    <?php
+    $st = 'closed';
+    if (isset($_GET['cid'])) {
+        $cid = $_GET['cid'];
+        $query = mysqli_query($con, "SELECT * FROM complaints WHERE complaintId ='$cid'");
+        if ($query) {
+            while ($row = mysqli_fetch_array($query)) {
+                ?>
+                <script>
+                    // Update the value of the read-only input field using JavaScript
+                    document.getElementById("description").value = "<?php echo $row['description']; ?>";
+                </script>
+                <?php
+            }
+        } else {
+            echo "Query failed: " . mysqli_error($con);
+        }
+    } else {
+        echo "Complaint ID not set.";
+    }
+    ?>
+</div>
+ <div class="form-group">
                                         <label for="officer">Investigator Officer</label>
                                         <select name="investigationofficers" class="form-control" required>
 <option value="">Select Officer</option> 
@@ -122,51 +194,16 @@ while($row=mysqli_fetch_array($query))
 </select>
                                         
                                     </div>
-
-                                	
-                                    <div class="form-group">
-    <label for="complaints">complaints Id</label>
-    <input type="text" placeholder="" name="complaintId" class="form-control" required>
-
-    <?php
-    $st = 'closed';
-    if (isset($_GET['cid'])) {
-        $cid = $_GET['cid'];
-        $query = mysqli_query($con, "SELECT * FROM complaints WHERE complaintId ='$cid'");
-        if ($query) {
-            while ($row = mysqli_fetch_array($query)) {
-                ?>
-                <option value="<?php echo $row['complaintId']; ?>"><?php echo $row['complaintId']; ?></option>
-                <?php
-            }
-        } else {
-            echo "Query failed: " . mysqli_error($con);
-        }
-    } else {
-        echo "Complaint ID not set.";
-    }
-    ?>
-</select>
-</div>
-
                                     
 
                                     <div class="form-group">
-															<label for="AppointmentDate">
-																Date
-															</label>
-<input class="form-control datepicker" name="appdate"  required="required" data-date-format="yyyy-mm-dd">
-	
-														</div>
+    <label for="date">Date</label>
+    <input type="text" class="form-control datepicker" name="date" required="required">
+</div>
 
-                                      <div class="form-group">
-                                        <label for="exampleInputEmail1">SubCategory Name</label>
-                                       
-                                        <input type="text" placeholder="Enter SubCategory Name"  name="subcategory" class="form-control" required>
-                                        
-                                    </div>
+                                      
                                 
-                                    <button type="submit" class="btn  btn-primary" name="submit">Add</button>
+                                    <button type="submit" class="btn  btn-primary" name="submit">ASSIGN</button>
                                 </form>
                             </div>
                            
@@ -186,6 +223,10 @@ while($row=mysqli_fetch_array($query))
                     </div>
                 </div>                  
           </div>
-      </div>           
+      </div>   
+       <!-- Required Js -->
+    <script src="assets/js/vendor-all.min.js"></script>
+    <script src="assets/js/plugins/bootstrap.min.js"></script>
+    <script src="assets/js/pcoded.min.js"></script>        
   </body>
 </html>

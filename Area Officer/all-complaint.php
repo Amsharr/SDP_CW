@@ -78,6 +78,7 @@ include('../Config/connection.php');
                                           <th>institution </th>
                                           <th>Date</th>
                                           <th>Status</th>
+                                          <th>Details</th>
                                           <th>Action</th>
                                       </tr>
                               </thead>
@@ -108,7 +109,13 @@ include('../Config/connection.php');
                                          
 
 <td>
-    <a href="complaint-details.php?cid=<?php echo htmlentities($row['complaintId']);?>" class="btn btn-primary">A View Details</a> 
+    <a href="complaint-details.php?cid=<?php echo ($row['complaintId']);?>" class="btn btn-primary rounded-circle">
+        <i class="fas fa-eye"></i> View
+    </a> 
+</td>
+
+<td>
+    <a href="assign-complain.php?cid=<?php echo htmlentities($row['complaintId']);?>" class="btn btn-primary">Assign</a> 
 </td>
 </td>
 

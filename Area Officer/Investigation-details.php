@@ -15,7 +15,7 @@ include('../Config/connection.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
     <!-- vendor css -->
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+    <link rel="stylesheet" href="assets/css/style.css"> -->
     
     <script language="javascript" type="text/javascript">
     var popUpWin=0;
@@ -120,21 +120,36 @@ include('../Config/connection.php');
                                                         <tbody>
                                                         <?php $st='closed';
                                                         $cid=$_GET['cid'];
-                        $query=mysqli_query($con,"select complaints.*,complainers.firstName as name,institutions.type as instname from complaints join complainers on complainers.userId=complaints.userId join institutions on institutions.institutionId =complaints.institutionId where complaints.complaintId='$cid'");
+                                                        $officerId=$_GET['officerId'];
+
+                        $query = mysqli_query($con, "SELECT complaints.*, complainers.firstName AS name, institutions.type AS instname, 
+    investigationofficers.firstName AS officerName, currentcomplaints.officerId, currentcomplaints.date
+    FROM complaints 
+    JOIN complainers ON complainers.userId = complaints.userId 
+    JOIN institutions ON institutions.institutionId = complaints.institutionId 
+    JOIN currentcomplaints ON currentcomplaints.complaintId = complaints.complaintId 
+    JOIN investigationofficers ON investigationofficers.officerId = currentcomplaints.officerId 
+    WHERE complaints.complaintId='$cid' AND currentcomplaints.officerId='$officerId'");
+
+
+if (!$query) {
+    die(mysqli_error($con)); // Output any MySQL errors
+}
 while($row=mysqli_fetch_array($query))
                         {
 
                         ?>                                  
                                                                 <tr>
-                                                                    <td><b>Complaint Number</b></td>
-                                                                    <td><?php echo htmlentities($row['complaintId']);?></td>
-                                                                    <td><b>Complainant Name</b></td>
-                                                                    <td> <?php echo htmlentities($row['name']);?></td>
-                                                                   
-                                                                    <td><b>Reg Date</b></td>
-                                                                    <td><?php echo htmlentities($row['date']);?>
-                                                                    </td>
-                                                                </tr>
+    <td><b>Complaint Number</b></td>
+    <td><?php echo htmlentities($row['complaintId']);?></td>
+    <td><b>Complainant Name</b></td>
+    <td><?php echo htmlentities($row['name']);?></td>
+    <td><b>Date</b></td>
+    <td><?php echo htmlentities($row['date']);?></td>
+</tr>
+
+
+
 
                                                                 <tr>
                                                                     <td><b>Institutions </b></td>
@@ -165,50 +180,35 @@ while($row=mysqli_fetch_array($query))
                                                                 <?php endif;?></td>
                                                                     
                                                                 </tr>
-                                                                <hr>
-
-
-
-
-                        <?php $ret=mysqli_query($con,"select complaintremark.remark as remark,complaintremark.status as sstatus,complaintremark.remarkDate as rdate from complaintremark join complaints on complaints.complaintId=complaintremark.complaintNumber where complaintremark.complaintNumber='$cid'");
-                        $cnt=1;
-                        $count=mysqli_num_rows($ret);
-                        if($count): ?>
-                        <tr>
-                        <th>S.No</th>
-                        <th colspan="3">Remark</th>
-                        <th>Status</th>
-                        <th>Updation Date</th>
-                        </tr>
-                            <?php 
-                        while($rw=mysqli_fetch_array($ret))
-                        {
-                        ?>
                                                                 <tr>
-                                                                    <td><?php echo htmlentities($cnt);?></td>
-                                                                    <td colspan="3"><?php echo  htmlentities($rw['remark']); ?></td>
-                                                                    <td><?php echo  htmlentities($rw['sstatus']); ?></td>
-                                                                    <td><?php echo  htmlentities($rw['rdate']); ?></td></tr><?php $cnt=$cnt+1; } endif; ?>
+    <td colspan="4"> 
+        <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?uid=<?php echo htmlentities($row['userId']);?>');" title="View User Details">
+            <button type="button" class="btn btn-primary">View User Details</button>
+        </a>
+    </td>
+</tr>
+                                                                <tr>
+    <tr>
+    <td><b>Investigator Id</b></td>
+    <td><?php echo htmlentities($row['officerId']);?></td>
+    <td><b>Investigator Name</b></td>
+    <td><?php echo htmlentities($row['officerName']);?></td>
+    <td><b>Investigator Date</b></td>
+    <td><?php echo htmlentities($row['date']);?></td>
+</tr>
 
-
-
-
-
-                        <tr>
                                                                 
-                                                                    
-                                                                    <td> 
-                                                                    <?php if($row['status']=="closed"){
+                                                                <hr>
+<tr>
+    <td colspan="4"> 
+        <a href="javascript:void(0);" onClick="popUpWindow('officerprofile.php?officerId=<?php echo htmlentities($row['officerId']);?>');" title="View Investigator Details">
+            <button type="button" class="btn btn-primary">View Investigator Details</button>
+        </a>
+    </td>
+</tr>
+<br>
 
-                                                                        } else {?>
-                        <a href="javascript:void(0);" onClick="popUpWindow('updatecomplaint.php?cid=<?php echo htmlentities($row['complaintId']);?>');" title="Update order">
-                                                                    <button type="button" class="btn btn-primary">Take Action</button></td>
-                                                                    </a><?php } ?></td>
-                                                                    <td colspan="4"> 
-                                                                    <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?uid=<?php echo htmlentities($row['userId']);?>');" title="Update order">
-                                                                    <button type="button" class="btn btn-primary">View User Detials</button></a></td>
-                                                                    
-                                                                </tr>
+
                                                                 <?php  } ?>
                                                         
                                                         </tbody>

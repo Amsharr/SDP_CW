@@ -8,7 +8,25 @@ include('../Config/connection.php');
 // else{
 // // date_default_timezone_set('Asia/Kolkata');// change according timezone
 // // $currentTime = date( 'd-m-Y h:i:s A', time () );
-// ?>
+
+if (isset($_GET['del']) && $_GET['del'] == 'delete' && isset($_GET['cid'])) {
+    $complaintIdToDelete = $_GET['cid'];
+    $deleteQuery = mysqli_query($con, "DELETE FROM currentcomplaints WHERE complaintId = '$complaintIdToDelete'");
+
+    if ($deleteQuery) {
+        // Set a success message in the session
+        $_SESSION['msg'] = "Complaint with ID $complaintIdToDelete has been successfully deleted.";
+        // Redirect to the same page to avoid resubmission on refresh
+        header("Location: investigation-complain.php");
+        exit;
+    } else {
+        // Set an error message in the session
+        $_SESSION['msg'] = "Error deleting the complaint.";
+        // Redirect to the same page to avoid resubmission on refresh
+        header("Location: investigation-complain.php");
+        exit;
+    }
+}?>
 
 <!doctype html>
 <html lang="en">
@@ -20,6 +38,14 @@ include('../Config/connection.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="../CSS/systemAdmin/homepage.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- flatpickr CSS -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
   </head>
   <nav class="navbar bg-success" data-bs-theme="dark">
@@ -74,10 +100,8 @@ include('../Config/connection.php');
                                           <th>Invesitigator Name</th>
                                           <th>Description </th>
                                           <th>Date</th>
-                                          <th>Status</th>
-                                          <th>Date</th>
-                                          <th>Remakrs</th>
-                                          <th>View</th>
+                                          <th>Investigation Remakrs</th>
+                                          <th>Status</th>                                   
                                           <th>Action</th>
                                       </tr>
                               </thead>
@@ -91,30 +115,29 @@ include('../Config/connection.php');
                                       ?>  
                                       <tr>
                                           <td><?php echo htmlentities($cnt);?></td>
+                                        
                                           <td><?php echo htmlentities($row['complaintId']);?></td>
                                           <td><?php echo htmlentities($row['name']);?></td>
                                           <td><?php echo htmlentities($row['description']);?></td>
                                           <td> <?php echo htmlentities($row['date']);?></td>
-                                         <td>
-                                              <?php $status=$row['status'];
-                                              if($status==''): ?>
-                                              <span class="badge badge-danger">Not Processed Yet</span>
-                                          <?php elseif($status=='in process'):?>
-                                           <span class="badge badge-warning">In Process</span>
-                                       <?php elseif($status=='closed'):?>
-                                           <span class="badge badge-success">Closed</span>
-                                       <?php endif;?>
-</td>
+                                          <td> <?php echo htmlentities($row['investigatorRemarks']);?></td>
+                                          <td> <?php echo htmlentities($row['status']);?></td>
+                                          
                                          
-
+                                         
 <td>
-    <a href="complaint-details.php?cid=<?php echo htmlentities($row['complaintId']);?>" class="btn btn-primary">A View Details</a> 
-</td>
-</td>
+    <a href="investigation-complain.php?cid=<?php echo $row['complaintId']?>&del=delete" class="btn btn-icon btn-danger rounded-circle" onClick="return confirm('Are you sure you want to delete?')">
+        <i class="feather icon-delete"></i>
+    </a>
 
-<td>
-    <a href="assign-complain.php?cid=<?php echo htmlentities($row['complaintId']);?>" class="btn btn-secondary">Assign</a> 
+    <a href="Investigation-details.php?cid=<?php echo $row['complaintId'];?>&officerId=<?php echo $row['officerId'];?>" class="btn btn-primary rounded-circle">
+    <i class="fas fa-eye"></i>
+</a>
+
 </td>
+                                        
+
+
 </td>
 
                                       
@@ -161,6 +184,9 @@ include('../Config/connection.php');
         <!-- [ Main Content ] end -->
                                 
           </div>
-      </div>           
+      </div>    
+      <script src="assets/js/vendor-all.min.js"></script>
+    <script src="assets/js/plugins/bootstrap.min.js"></script>
+    <script src="assets/js/pcoded.min.js"></script>       
   </body>
 </html>
