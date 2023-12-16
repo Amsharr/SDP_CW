@@ -9,13 +9,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="../CSS/systemAdmin/homepage.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+  
   </head>
   <nav class="navbar bg-success" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Complaint Managment System</a>      
+    <a class="navbar-brand" href="index.php">Complaint Managment System</a>      
     </div>
   </div>
 </nav>
+
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
@@ -34,21 +37,16 @@
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="all-complaint.php"><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
                               <li><a class="dropdown-item" href="investigation-complain.php"><span class="ms-1 d-none d-sm-inline">Assigned Complaints</span></a></li>
-
-                              <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
-                              <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
-                              <li><a class="dropdown-item" href="closed-complaint.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
-
                             </ul>
                           </div>      
                           <div class="dropdown mt-3">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                              <i class="fa-solid fa-file-shield"></i> <span class="ms-1 d-none d-sm-inline">Investigation</span></a>
+                              <i class="fa-solid fa-file-shield"></i> <span class="ms-1 d-none d-sm-inline">Status</span></a>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="investigation-complaint.php"><i class="fa-solid fa-tree"></i><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
-                              <li><a class="dropdown-item" href="assign-complain.php"><i class="fa-solid fa-paw"></i><span class="ms-1 d-none d-sm-inline">Assign Complain</span></a></li>
-                            </ul>
+                              <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
+                              <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
+                              <li><a class="dropdown-item" href="closed-complaint.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li></ul>
                           </div>     
                       </ul>                
                       <hr>
@@ -63,40 +61,21 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Wildlife Complaints</h5>
                                     <p class="card-text"> Click on the below button to view the complaints for the Wildlife institution</p>
-                                    <a href="./WildlifeComplaints/viewWildlifeComplaints.php" class="btn btn-warning"><i class="fa-solid fa-arrow-right"></i><span class="ms-1 d-none d-sm-inline">Go to Complaints</span></a>
+                                    <a href="all-complaint.php" class="btn btn-warning"><i class="fa-solid fa-arrow-right"></i><span class="ms-1 d-none d-sm-inline">Go to Complaints</span></a>
                                 </div>
                             </div>
                         </div>
                         <div class="dashboardItems">
                             <div class="card" style="width: 18rem;">
-                                <img src="../img/systemAdmin/Forest.jpg" class="card-img-top" alt="Forest image">
+                                <img src="../img/systemAdmin/users.jpg" class="card-img-top" alt="Forest image">
                                 <div class="card-body">
-                                    <h5 class="card-title">Forest Complaints</h5>
-                                    <p class="card-text">Click on the below button to view the complaints for the Forest institution.</p>
-                                    <a href="./ForestComplaints/viewForestComplaints.php" class="btn btn-success"><i class="fa-solid fa-arrow-right"></i><span class="ms-1 d-none d-sm-inline">Go to Complaints</span></a>
+                                    <h5 class="card-title">Assigned Complaints</h5>
+                                    <p class="card-text">Click on the below button to view the assigned complaints for the investigator officers.</p>
+                                    <a href="investigation-complain.php" class="btn btn-success"><i class="fa-solid fa-arrow-right"></i><span class="ms-1 d-none d-sm-inline">Go to Complaints</span></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="dashboardItems">
-                            <div class="card" style="width: 18rem;">
-                                <img src="../img/systemAdmin/users.jpg" class="card-img-top" alt="users image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Users</h5>
-                                    <p class="card-text">Click on the below button to view and manage the Users. </p>
-                                    <div class="dropdown mt-3">
-                                      <br>
-                                      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                        <i class="fa-solid fa-id-card-clip"></i> <span class="ms-1 d-none d-sm-inline">Users</span></a>
-                                      </button>
-                                      <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="./complainers/viewComplainers.php"><i class="fa-solid fa-person"></i> <span class="ms-1 d-none d-sm-inline">Complainers</span></a></li>
-                                        <li><a class="dropdown-item" href="./AreaOfficers/viewAreaOfficers.php"><i class="fa-solid fa-person-military-to-person"></i><span class="ms-1 d-none d-sm-inline">Area Officers</span></a></li>
-                                        <li><a class="dropdown-item" href="./InvestigationOfficer/viewInvestigationOfficers.php"><i class="fa-solid fa-person-military-pointing"></i><span class="ms-1 d-none d-sm-inline"> Investigation Offiers</span></a></li>
-                                      </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>                  
           </div>
