@@ -108,7 +108,7 @@ include('../Config/connection.php');
                                                     <tbody>
                                                         <?php
                                                         $st = 'closed';
-                                                        $query = mysqli_query($con, "select complaints.*,complainers.firstName as name from complaints join complainers on complainers.userId=complaints.userId where complaints.status='$st'");
+                                                        $query = mysqli_query($con, "select complaints.*,complainers.firstName as name from complaints join complainers on complainers.userId=complaints.userId where complaints.status='$st '");
                                                         $cnt = 1;
                                                         while ($row = mysqli_fetch_array($query)) {
                                                         ?>

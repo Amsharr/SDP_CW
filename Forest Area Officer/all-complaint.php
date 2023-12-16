@@ -69,7 +69,7 @@ include('../Config/connection.php');
                 </div>
             </div>
             <div class="col py-3">
-                <h3>Wildlife Complaints</h3>
+                <h3>Forest Complaints</h3>
                 <table class="table table-striped">
                     <thead>
                         <tr>
