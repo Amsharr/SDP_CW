@@ -67,8 +67,9 @@
                 <th >user Id</th>
                 <th >First Name</th>
                 <th >Last Name</th>
+                <th>Address</th>
                 <th >Contact No.</th>
-                <th >Emails</th>
+                <th >Email</th>
                 <th>Username</th> 
                 <th>Password</th>  
                 <th>Operations</th>        
@@ -84,6 +85,7 @@
                     $id=$row['userId'];
                     $firstName=$row['firstName'];
                     $lastName=$row['lastName'];
+                    $address=$row['address'];
                     $contactNo=$row['contactNo'];
                     $email=$row['email'];
                     $username=$row['username'];
@@ -92,10 +94,11 @@
                     <td scope="row">'.$id.'</td>
                     <td>'.$firstName.'</td>
                     <td>'.$lastName.'</td>
+                    <td>'.$address.'</td>
                     <td>'.$contactNo.'</td>
                     <td>'.$email.'</td>
                     <td>'.$username.'</td>
-                    <td>'.$password.'</td>
+                    <td>'.str_repeat('*', strlen($password)).'</td>
                     <td>
                     <button class="btn btn-primary" name="edit"><a href="editUser.php?updateId='.$id.'" class="text-light">EDIT</a></button>
                     <button class="btn btn-danger" name="delete"><a href="deleteUser.php?deleteid='.$id.'" class="text-light">DELETE</a></button>                  

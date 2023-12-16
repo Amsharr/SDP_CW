@@ -7,6 +7,7 @@
     $row=mysqli_fetch_assoc($result);
     $firstName=$row['firstName'];
     $lastName=$row['lastName'];
+    $address=$row['address'];
     $contactNo=$row['contactNo'];
     $email=$row['email'];
     $username=$row['username'];
@@ -16,12 +17,13 @@
 	if(isset($_POST["submit"])){
         $firstName=$_POST['firstName'];
         $lastName=$_POST['lastName'];
+        $address=$_POST['address'];
         $contactNo=$_POST['contactNo'];
         $email=$_POST['email'];
         $username=$_POST['username'];
         $password=$_POST['password'];
 
-		$query ="UPDATE `complainers` set userId=$id,firstName='$firstName',lastName='$lastName',contactNo='$contactNo',email='$email',username='$username',password='$password' where userId=$id";
+		$query ="UPDATE `complainers` set userId=$id,firstName='$firstName',lastName='$lastName',contactNo='$contactNo',email='$email',username='$username',password='$password', address='$address' where userId=$id";
 		mysqli_query($conn, $query);
 		echo '<script>
         window.location.href ="viewComplainers.php";
@@ -87,32 +89,37 @@
                     <!-- First Name -->
                     <div class="mb-3">
                         <label> First Name: </label>
-                        <input type="text" name="firstName" class="form-control" autofocus="on" value=<?php echo $firstName;?> required>                     
+                        <input type="text" name="firstName" class="form-control" autofocus="on" required value=<?php echo $firstName;?>>                     
                     </div>
                     <!-- Last Name -->
                     <div class="mb-3">
                         <label> Last Name:</label>
-                        <input type="text" name="lastName" class="form-control" value=<?php echo $lastName;?> required>
+                        <input type="text" name="lastName" class="form-control" required value=<?php echo $lastName;?>>
                     </div>
-                    <!-- Mobile No. -->
+                    <!-- Address -->
+                    <div class="mb-3">
+                      <label>Address:</label>
+                      <input type="text" name="address" class="form-control" required value="<?php echo $address;?>" >
+                    </div>
+                    <!-- Contact No. -->
                     <div class="mb-3">
                         <label> Contact No. :</label>
-                        <input type="text" name="contactNo" class="form-control" autofocus="on" value=<?php echo $contactNo;?> ]>                     
+                        <input type="text" name="contactNo" maxlength="12" class="form-control" autofocus="on" required value="<?php echo $contactNo;?>">                     
                     </div>
                     <!-- Email -->
                     <div class="mb-3">
                         <label> Email</label>
-                        <input type="text" name="email" class="form-control" value=<?php echo $email;?> required>
+                        <input type="text" name="email" class="form-control" required value=<?php echo $email;?>>
                     </div>
                     <!-- Username -->
                     <div class="mb-3">
                         <label> Username: </label>
-                        <input type="text" name="username" class="form-control" autofocus="on" value=<?php echo $username;?> required>                     
+                        <input type="text" name="username" class="form-control" autofocus="on" required value=<?php echo $username;?>>                     
                     </div>
                     <!-- Password -->
                     <div class="mb-3">
                         <label> Password: </label>
-                        <input type="text" name="password" class="form-control" autofocus="on" value=<?php echo $password;?> required>                     
+                        <input type="text" name="password" class="form-control" autofocus="on" required value=<?php echo $password;?>>                     
                     </div>
                     <!-- Add button  -->
                     <div>
