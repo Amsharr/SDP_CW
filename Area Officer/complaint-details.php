@@ -33,7 +33,7 @@ include('../Config/connection.php');
   </head>
   <nav class="navbar bg-success" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Complaint Managment System</a>      
+    <a class="navbar-brand" href="index.php">Complaint Managment System</a>      
     </div>
   </div>
 </nav>
@@ -54,29 +54,28 @@ include('../Config/connection.php');
                             </button>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="all-complaint.php"><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
-                              <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
-                              <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
-                              <li><a class="dropdown-item" href="closed-complaint.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
-
+                              <li><a class="dropdown-item" href="investigation-complain.php"><span class="ms-1 d-none d-sm-inline">Assigned Complaints</span></a></li>
+                           
                             </ul>
                           </div>      
                           <div class="dropdown mt-3">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                              <i class="fa-solid fa-file-shield"></i> <span class="ms-1 d-none d-sm-inline">Complaints</span></a>
+                              <i class="fa-solid fa-file-shield"></i> <span class="ms-1 d-none d-sm-inline">Status</span></a>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="./ForestComplaints/viewForestComplaints.php"><i class="fa-solid fa-tree"></i><span class="ms-1 d-none d-sm-inline">Forest</span></a></li>
-                              <li><a class="dropdown-item" href="assign-complain.php"><i class="fa-solid fa-paw"></i><span class="ms-1 d-none d-sm-inline">Wildlife</span></a></li>
-                            </ul>
+                              <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
+                              <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
+                              <li><a class="dropdown-item" href="closed-complaint.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
+                           </ul>
                           </div>     
                       </ul>                
                       <hr>
                   </div>
               </div>              
-                <div class="row justify-content-center">
+                
                     <div class="col py-3">
                       <!-- [ Main Content ] start -->
-                        <section class="pcoded-main-container">
+                        <section class="">
                             <div class="pcoded-content">
                                 <!-- [ breadcrumb ] start -->
                                 <div class="page-header">
@@ -97,6 +96,8 @@ include('../Config/connection.php');
                                 </div>
                                 <!-- [ breadcrumb ] end -->
                                 <!-- [ Main Content ] start -->
+                    <div class="col py-3">
+
                                 <div class="row">
                                 
                                     <!-- [ form-element ] start -->
@@ -105,14 +106,6 @@ include('../Config/connection.php');
                                         
                                             <div class="card-body">
                                                 <h5>View Complaints Details</h5>
-                                                <hr>
-                                            
-                                            <div class="row">
-                                                    <div class="col-xl-12">
-                                        <div class="card">
-                                        
-                                            <div class="card-body table-border-style">
-                                                <div class="table-responsive">
                                                     <table class="table table-bordered">
                                                         <thead>
                                                             

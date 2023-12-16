@@ -50,7 +50,7 @@ if (isset($_GET['del']) && $_GET['del'] == 'delete' && isset($_GET['cid'])) {
   </head>
   <nav class="navbar bg-success" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Complaint Managment System</a>      
+    <a class="navbar-brand" href="index.php">Complaint Managment System</a>      
     </div>
   </div>
 </nav>
@@ -70,20 +70,19 @@ if (isset($_GET['del']) && $_GET['del'] == 'delete' && isset($_GET['cid'])) {
                               <i class="fa-solid fa-id-card-clip"></i> <span class="ms-1 d-none d-sm-inline">Complaints</span></a>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="all-complaint.php"><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
-                              <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
-                              <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
-                              <li><a class="dropdown-item" href="closed-complaint.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
-
+                               <li><a class="dropdown-item" href="all-complaint.php"><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
+                              <li><a class="dropdown-item" href="investigation-complain.php"><span class="ms-1 d-none d-sm-inline">Assigned Complaints</span></a></li>
+                           
                             </ul>
                           </div>      
                           <div class="dropdown mt-3">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                              <i class="fa-solid fa-file-shield"></i> <span class="ms-1 d-none d-sm-inline">Investigation</span></a>
+                              <i class="fa-solid fa-file-shield"></i> <span class="ms-1 d-none d-sm-inline">Status</span></a>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="investigation-complain.php"><i class="fa-solid fa-tree"></i><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
-                              <li><a class="dropdown-item" href="assign-complain.php"><i class="fa-solid fa-paw"></i><span class="ms-1 d-none d-sm-inline">Assign Complain</span></a></li>
+                             <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
+                              <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
+                              <li><a class="dropdown-item" href="closed-complaint.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
                             </ul>
                           </div>     
                       </ul>                
@@ -92,16 +91,18 @@ if (isset($_GET['del']) && $_GET['del'] == 'delete' && isset($_GET['cid'])) {
               </div>              
                 
                     <div class="col py-3">
-                  <h1>Dashboard</h1>
+                  <h3>Assigned Complaints</h3>
                     <table class="table table-striped">
                       <thead>
-                                      <tr><th>S.No</th>
+                                      <tr>
+                                          <th>S.No</th>
                                           <th>Complaint No</th>
                                           <th>Invesitigator Name</th>
                                           <th>Description </th>
                                           <th>Date</th>
                                           <th>Investigation Remakrs</th>
                                           <th>Status</th>                                   
+                                          <th>View</th>
                                           <th>Action</th>
                                       </tr>
                               </thead>
@@ -123,22 +124,22 @@ if (isset($_GET['del']) && $_GET['del'] == 'delete' && isset($_GET['cid'])) {
                                           <td> <?php echo htmlentities($row['investigatorRemarks']);?></td>
                                           <td> <?php echo htmlentities($row['status']);?></td>
                                           
+<td style="padding-right: 5px;">
+    <a href="Investigation-details.php?cid=<?php echo ($row['complaintId']);?>&officerId=<?php echo $row['officerId'];?>" class="btn btn-info">
+        <i class="fas fa-eye"></i> View
+    </a> 
+</td>                                  
                                          
-                                         
-<td>
-    <a href="investigation-complain.php?cid=<?php echo $row['complaintId']?>&del=delete" class="btn btn-icon btn-danger rounded-circle" onClick="return confirm('Are you sure you want to delete?')">
-        <i class="feather icon-delete"></i>
+<td style="padding-right: 5px;">
+    <a href="investigation-complain.php?cid=<?php echo $row['complaintId']?>&del=delete" class="btn btn-danger " onClick="return confirm('Are you sure you want to delete?')">
+        <i class="feather">Remove</i>
     </a>
 
-    <a href="Investigation-details.php?cid=<?php echo $row['complaintId'];?>&officerId=<?php echo $row['officerId'];?>" class="btn btn-primary rounded-circle">
-    <i class="fas fa-eye"></i>
-</a>
+    
 
 </td>
                                         
 
-
-</td>
 
                                       
                                           

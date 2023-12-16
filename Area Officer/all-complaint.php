@@ -1,14 +1,7 @@
 <?php
-// session_start();
+
 include('../Config/connection.php');
-// if(strlen($_SESSION['aid'])==0)
-//     {   
-// header('location:index.php');
-// }
-// else{
-// // date_default_timezone_set('Asia/Kolkata');// change according timezone
-// // $currentTime = date( 'd-m-Y h:i:s A', time () );
-// ?>
+ ?>
 
 <!doctype html>
 <html lang="en">
@@ -27,7 +20,7 @@ include('../Config/connection.php');
 </head>
 <nav class="navbar bg-success" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Complaint Managment System</a>      
+    <a class="navbar-brand" href="index.php">Complaint Managment System</a>      
     </div>
   </div>
 </nav>
@@ -48,20 +41,18 @@ include('../Config/connection.php');
                             </button>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="all-complaint.php"><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
-                              
-                              <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
-                              <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
-                              <li><a class="dropdown-item" href="closed-complaint.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
-
+                              <li><a class="dropdown-item" href="investigation-complain.php"><span class="ms-1 d-none d-sm-inline">Assigned Complaints</span></a></li>
+                           
                             </ul>
                           </div>      
                           <div class="dropdown mt-3">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                              <i class="fa-solid fa-file-shield"></i> <span class="ms-1 d-none d-sm-inline">Complaints</span></a>
+                              <i class="fa-solid fa-file-shield"></i> <span class="ms-1 d-none d-sm-inline">Status</span></a>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="./ForestComplaints/viewForestComplaints.php"><i class="fa-solid fa-tree"></i><span class="ms-1 d-none d-sm-inline">Forest</span></a></li>
-                              <li><a class="dropdown-item" href="assign-complain.php"><i class="fa-solid fa-paw"></i><span class="ms-1 d-none d-sm-inline">Wildlife</span></a></li>
+                              <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
+                              <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
+                              <li><a class="dropdown-item" href="closed-complaint.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
                             </ul>
                           </div>     
                       </ul>                
@@ -69,13 +60,13 @@ include('../Config/connection.php');
                   </div>
               </div>                              
                 <div class="col py-3">
-                  <h1>Dashboard</h1>
+                  <h3>Wildlife Complaints</h3>
                     <table class="table table-striped">
                       <thead>
                                       <tr><th>S.No</th>
                                           <th>Complaint No</th>
                                           <th>Complainant Name</th>
-                                          <th>institution </th>
+                                          <!-- <th>institution </th> -->
                                           <th>Date</th>
                                           <th>Status</th>
                                           <th>Details</th>
@@ -85,7 +76,7 @@ include('../Config/connection.php');
                               <tbody>
                                   <?php 
 
-                                      $query=mysqli_query($con,"select complaints.*,complainers.firstName as name from complaints join complainers on complainers.userId=complaints.userId ");
+                                      $query=mysqli_query($con,"select complaints.*,complainers.firstName as name from complaints join complainers on complainers.userId=complaints.userId where institutionId= 1 ");
                                       $cnt=1;
                                       while($row=mysqli_fetch_array($query))
                                       {
@@ -94,7 +85,7 @@ include('../Config/connection.php');
                                           <td><?php echo htmlentities($cnt);?></td>
                                           <td><?php echo htmlentities($row['complaintId']);?></td>
                                           <td><?php echo htmlentities($row['name']);?></td>
-                                          <td><?php echo htmlentities($row['institutionId']);?></td>
+                                          <!-- <td><?php echo htmlentities($row['institutionId']);?></td> -->
                                           <td> <?php echo htmlentities($row['date']);?></td>
                                          <td>
                                               <?php $status=$row['status'];
@@ -108,16 +99,22 @@ include('../Config/connection.php');
 </td>
                                          
 
-<td>
-    <a href="complaint-details.php?cid=<?php echo ($row['complaintId']);?>" class="btn btn-primary rounded-circle">
+<td style="padding-right: 5px;">
+    <a href="complaint-details.php?cid=<?php echo ($row['complaintId']);?>" class="btn btn-info">
         <i class="fas fa-eye"></i> View
     </a> 
 </td>
 
 <td>
-    <a href="assign-complain.php?cid=<?php echo htmlentities($row['complaintId']);?>" class="btn btn-primary">Assign</a> 
+    <a href="assign-complain.php?cid=<?php echo htmlentities($row['complaintId']);?>" class="btn btn-dark">
+        <i class="fas fa-arrow-right"></i> Assign
+    </a> 
 </td>
-</td>
+
+
+
+
+
 
                                       
                                           

@@ -32,11 +32,13 @@ window.print();
 <title>User Profile</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <link href="anuj.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
     <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 <body>
+                    <div class="col py-3">
 
 <div style="margin-left:50px;">
  <form name="updateticket" id="updatecomplaint" method="post"> 
@@ -65,27 +67,28 @@ window.print();
       <td><textarea name="remark" cols="50" rows="10" required="required" class="form-control"></textarea></td>
     </tr>
     
-
+<tr><td colspan="1">&nbsp;</td></tr>
 
         <tr height="50">
       <td>&nbsp;</td>
-      <td><input type="submit" name="update" value="Submit"></td>
+      <td><input type="submit" name="update" class="btn btn-primary" value="Submit"></td>
     </tr>
 
 
 
-       <tr><td colspan="2">&nbsp;</td></tr>
+       <tr><td colspan="1">&nbsp;</td></tr>
     
     <tr>
   <td></td>
       <td >   
-      <input name="Submit2" type="submit" class="txtbox4" value="Close this window " onClick="return f2();" style="cursor: pointer;"  /></td>
+      <input name="Submit2" type="submit" class="txtbox4 btn btn-danger" value="Close " onClick="return f2();" style="cursor: pointer;"  /></td>
     </tr>
    
 
  
 </table>
  </form>
+</div>
 </div>
 
 </body>

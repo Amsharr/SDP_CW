@@ -52,7 +52,7 @@ $query=mysqli_query($con,"insert into currentcomplaints(complaintId, officerId, 
   </head>
   <nav class="navbar bg-success" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Complaint Managment System</a>      
+    <a class="navbar-brand" href="index.php">Complaint Managment System</a>      
     </div>
   </div>
 </nav>
@@ -73,35 +73,34 @@ $query=mysqli_query($con,"insert into currentcomplaints(complaintId, officerId, 
                             </button>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="all-complaint.php"><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
-                              <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
-                              <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
-                              <li><a class="dropdown-item" href="closed-complaint.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
-
+                              <li><a class="dropdown-item" href="investigation-complain.php"><span class="ms-1 d-none d-sm-inline">Assigned Complaints</span></a></li>
+                           
                             </ul>
                           </div>      
                           <div class="dropdown mt-3">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                              <i class="fa-solid fa-file-shield"></i> <span class="ms-1 d-none d-sm-inline">Investigation</span></a>
+                              <i class="fa-solid fa-file-shield"></i> <span class="ms-1 d-none d-sm-inline">Status</span></a>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="investigation-complain.php"><i class="fa-solid fa-tree"></i><span class="ms-1 d-none d-sm-inline">All Complaints</span></a></li>
-                              <li><a class="dropdown-item" href="assign-complain.php"><i class="fa-solid fa-paw"></i><span class="ms-1 d-none d-sm-inline">Assign Complain</span></a></li>
+                               <li><a class="dropdown-item" href="notprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">Pending</span></a></li>
+                              <li><a class="dropdown-item" href="inprocess-complaint.php"><span class="ms-1 d-none d-sm-inline">In Process</span></a></li>
+                              <li><a class="dropdown-item" href="closed-complaint.php"><span class="ms-1 d-none d-sm-inline">Closed</span></a></li>
                             </ul>
                           </div>     
                       </ul>                
                       <hr>
                   </div>
               </div>              
-                <div class="row justify-content-center">
+                
                     <div class="col py-3">
                     <!-- [ Main Content ] start -->
-        <div class="row">
+    
           
             <!-- [ form-element ] start -->
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Investigation</h5>
+                        <h3>Assigning Investigator Officer for complaint</h>
                     </div>
                     <div class="card-body">
                         <div class="row">
