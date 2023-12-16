@@ -70,6 +70,7 @@ include('../Config/connection.php');
                             <th>Complainant Name</th>
                             <!-- <th>institution </th> -->
                             <th>Date</th>
+                            <th>location</th>
                             <th>Status</th>
                             <th>Details</th>
                             <th>Action</th>
@@ -87,6 +88,8 @@ include('../Config/connection.php');
                                 <td><?php echo htmlentities($row['name']); ?></td>
                                 <!-- <td><?php echo htmlentities($row['institutionId']);?></td> -->
                                 <td> <?php echo htmlentities($row['date']); ?></td>
+                                <td> <?php echo htmlentities($row['location']); ?></td>
+
                                 <td>
                                     <?php $status = $row['status'];
                                     if ($status == '') : ?>
