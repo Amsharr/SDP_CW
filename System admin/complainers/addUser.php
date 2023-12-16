@@ -2,14 +2,15 @@
 	require('C:/xampp/htdocs/SDP_CW/Config/connection.php');
 
 	if(isset($_POST["submit"])){
-        $firstName=$_POST['firstName'];
-        $lastName=$_POST['lastName'];
-        $contactNo=$_POST['contactNo'];
-        $email=$_POST['email'];
-        $username=$_POST['username'];
-        $password=$_POST['password'];
+    $firstName=$_POST['firstName'];
+    $lastName=$_POST['lastName'];
+    $address=$_POST['address'];
+    $contactNo=$_POST['contactNo'];
+    $email=$_POST['email'];
+    $username=$_POST['username'];
+    $password=$_POST['password'];
 
-		$query = "INSERT INTO complainers VALUES('', '$firstName', '$lastName', '$contactNo', '$email', '$username', '$password')";
+		$query = "INSERT INTO complainers VALUES('', '$firstName', '$lastName', '$address','$contactNo', '$email', '$username', '$password')";
 		mysqli_query($conn, $query);
 		echo '<script>
       	window.location.href ="viewComplainers.php";
@@ -82,10 +83,15 @@
                         <label> Last Name:</label>
                         <input type="text" name="lastName" class="form-control" required>
                     </div>
-                    <!-- Mobile No. -->
+                    <!-- Address -->
+                    <div class="mb-3">
+                      <label>Address:</label>
+                      <input type="text" name="address" class="form-control" required>
+                    </div>
+                    <!-- Contact No. -->
                     <div class="mb-3">
                         <label> Contact No. :</label>
-                        <input type="text" name="mobileNo" class="form-control" autofocus="on" required>                     
+                        <input type="text" name="contactNo" maxlength="12" class="form-control" autofocus="on" required>                     
                     </div>
                     <!-- Email -->
                     <div class="mb-3">
