@@ -1,43 +1,50 @@
 <?php
-	require('C:/xampp/htdocs/SDP_CW/Config/connection.php');
-    $id=$_GET['updateId'];
+    require('C:/xampp/htdocs/SDP_CW/Config/connection.php');
 
-    $sql="SELECT * from `complaints` where complaintId=$id";
-    $result=mysqli_query($conn,$sql);
-    $row=mysqli_fetch_assoc($result);
-    $complaintId=$row['complaintId'];
-    $userId=$row['userId'];
-    $institutionId=$row['institutionId'];
-    $description=$row['description'];
-    $location=$row['location'];
-    $status=$row['status'];
-    $date=$row['date'];
+    if(isset($_GET['updateId'])) {
+        $id = $_GET['updateId'];
+
+        $sql = "SELECT * FROM `complains` WHERE complainId = $id";
+        $result = mysqli_query($conn, $sql);
+        
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $userId = $row['userId'];
+            $institutionId = $row['institutionId'];
+            $Description = $row['Description'];
+            $status = $row['status'];
+            $dateTime = $row['dateTime'];
+        } else {
+            echo "Error retrieving data: " . mysqli_error($conn);
+            exit;
+        }
+    }
 
     //edit data 
-	if(isset($_POST["submit"])){
-    $complaintId=$_POST['complaintId'];
-    $userId=$_POST['userId'];
-    $institutionId=$_POST['institutionId'];
-    $description=$_POST['description'];
-    $location=$_POST['location'];
-    $status=$_POST['status'];
-    $date=$_POST['date'];
+    if(isset($_POST["submit"])){
+        $complainId = $_POST['complainId'];
+        $userId = $_POST['userId'];
+        $institutionId = $_POST['institutionId'];
+        $Description = $_POST['Description'];
+        $status = $_POST['status'];
+        $dateTime = $_POST['dateTime'];
 
-		$query = "UPDATE `complaints` SET 
-    userId='$userId',
-    institutionId='$institutionId',
-    description='$description',
-    location='$location',
-    status='$status',
-    date='$date'
-    WHERE complaintId=$id";
+        $query = "UPDATE `complains` SET userId=?, institutionId=?, Description=?, status=?, dateTime=? WHERE complainId=?";
+        $stmt = mysqli_prepare($conn, $query);
+        
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "sssssi", $userId, $institutionId, $Description, $status, $dateTime, $complainId);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
 
-		mysqli_query($conn, $query);
-		echo '<script>
-        window.location.href ="viewComplainers.php";
-        alert("Updated successfully")        
-        </script>';
-	}
+            echo '<script>
+                window.location.href ="viewForestComplaints.php";
+                alert("Updated successfully");
+                </script>';
+        } else {
+            echo "Error updating data: " . mysqli_error($conn);
+        }
+    }
 ?>
 
 
@@ -95,49 +102,36 @@
             <div class="col py-3">
             <form method="post">
                     <div class="container">
-                      <!-- complaintId -->
-                    <div class="mb-3">
-                        <label> complaint Id:</label>
-                        <input type="number" name="complaintId" class="form-control" value=<?php echo $complaintId;?> disabled>
-                    </div>
-                    <!-- instituition -->
-                    <div class="mb-3">
-                      <label> Institution:</label>
-                      <select class="form-select" aria-label="Default select example" required name="institutionId" >
-                          <option selected disabled>Select an instituition</option>
-                          <option value="1" <?php echo ($institutionId == 1) ? 'selected' : ''; ?>>Wildlife</option>
-                          <option value="2" <?php echo ($institutionId == 2) ? 'selected' : ''; ?>>Forest</option>
-                      </select>
-                    </div>
                     <!-- userId -->
                     <div class="mb-3">
                         <label> user Id:</label>
-                        <input type="number" name="userId" class="form-control" value=<?php echo $userId;?>>
-                    </div>                    
+                        <input type="number" name="userId"class="form-control" value=<?php echo $userId;?> required>
+                    </div>
+                    <!-- instituitionId -->
+                    <div class="mb-3">
+                        <label> Instituition Id:</label>
+                        <input type="number" name="instituitionId" min=1 max=2 class="form-control" placeholder="1 for Wildlife | 2 for Forest" value=<?php echo $institutionId;?> required>
+                    </div>
                     <!-- Description -->
                     <div class="mb-3">
                         <label> Description: </label>
-                        <input type="text" name="description" class="form-control" autofocus="on" required value="<?php echo $description;?>">                     
+                        <input type="text" name="Description" class="form-control" autofocus="on" value=<?php echo $Description;?> required>                     
                     </div>
-                    <!-- Location   -->
+                    <!-- Status -->
+                    <!-- <div class="mb-3">
+                        <label> Status: </label>
+                        <input type="dropdown" name="Status" class="form-control" autofocus="on" value=<?php echo $status;?> required>                     
+                    </div> -->
+
+                    <select class="form-select" name="status" value=<?php echo $status;?> required>
+                        <option value="1">Investigate</option>
+                        <option value="2">Under investigation</option>
+                        <option value="3">Completed investigation</option>
+                    </select>
+                    <!-- Date/time -->
                     <div class="mb-3">
-                        <label> Location: </label>
-                        <input type="text" name="location" class="form-control" autofocus="on" required value="<?php echo $location;?>">                     
-                    </div>  
-                    <!-- status-->
-                    <div class="mb-3">
-                      <label>Status:</label>
-                    <select class="form-select" name="position" required>
-                        <option selected disabled>Select status</option>
-                        <option value="Open" <?php echo ($status == 'Open') ? 'selected' : ''; ?>>Open</option>
-                        <option value="In progress" <?php echo ($status == 'In progress') ? 'selected' : ''; ?>>In progress</option>
-                        <option value="Completed" <?php echo ($status == 'Completed') ? 'selected' : ''; ?>>Completed</option>
-                      </select>
-                    </div>
-                    <!-- Date -->
-                    <div class="mb-3">
-                        <label> Date: </label>
-                        <input type="date" name="dateTime" class="form-control" autofocus="on" required value=<?php echo $date;?>>                     
+                        <label> Date & Time: </label>
+                        <input type="datetime-local" name="dateTime" class="form-control" autofocus="on" value=<?php echo $dateTime;?> required>                     
                     </div>
                     <!-- update button  -->
                     <div>
