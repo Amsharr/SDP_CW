@@ -110,7 +110,7 @@ if(isset($_POST['submit']))
                             </div>
                         </form>
                         <i class="fa fa-home" aria-hidden="true">
-                            <a class="" href="../index.php">Back Home</a>
+                            <a class="" href="index.php">Back Home</a>
                         </i>
                     </div>
                 </div>
