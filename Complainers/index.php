@@ -7,6 +7,7 @@
     <a href="registration.php">aa</a>
 </head>
 <body>
+    <a href="registration.php">aa</a>
     
 </body>
 </html>
