@@ -13,17 +13,18 @@ CREATE TABLE complainers (
     contactNo VARCHAR(15) NOT NULL,
     email VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    status INT(1)
 );
 
 -- Create Table: complaints
 CREATE TABLE complaints (
     complaintId INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT,    
     institutionId INT,
-    userId INT,
     description TEXT NOT NULL,
     location VARCHAR(255) NOT NULL,
-    status VARCHAR(255) DEFAULT 'open',
+    status VARCHAR(255) DEFAULT 'Open',
     date DATE NOT NULL,
     FOREIGN KEY (userId) REFERENCES complainers(userId),
     FOREIGN KEY (institutionId) REFERENCES institutions(institutionId)
@@ -67,7 +68,7 @@ CREATE TABLE currentComplaints (
     officerId INT,
     description TEXT NOT NULL,
     date DATE NOT NULL,
-    status VARCHAR(255) DEFAULT 'open',
+    status VARCHAR(255) DEFAULT 'Open',
     investigatorRemarks TEXT,
     FOREIGN KEY (complaintId) REFERENCES complaints(complaintId),
     FOREIGN KEY (officerId) REFERENCES investigationOfficers(officerId)
