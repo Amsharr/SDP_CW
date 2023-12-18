@@ -47,7 +47,7 @@
       <a class="navbar-brand" href="#">Complaint Management System</a>      
       <div class="ml-auto">
         <div class="dropdown mt-3" style="margin-bottom: 10px;">                        
-            <a class="btn btn-warning" href="./login.php" role="button"><i class="fa-solid fa-arrow-right"></i> <span class="ms-1 d-none d-sm-inline">Logout</span></a>
+            <a class="btn btn-warning" href="../login.php" role="button"><i class="fa-solid fa-arrow-right"></i> <span class="ms-1 d-none d-sm-inline">Logout</span></a>
         </div> 
       </div>
     </div>
