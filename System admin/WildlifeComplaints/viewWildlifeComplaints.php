@@ -57,59 +57,72 @@
             </div>
         </div>  
         <div class="col py-3">
-          <h3>Forest Complaints details</h3>
-        <div>
-            <a href="addForestComplaint.php">
-                <button name="Add" type="Add" class="btn btn-success">Add complaint</button>
-            </a>            
-        </div>
-        <br>
-        <table class="table table-bordered">
-          <thead>
-                <tr>
-                <th >Complaint Id</th>
-                <th >Institution Id</th>
-                <th >User Id</th>                
-                <th >Description</th>
-                <th>Location</th>
-                <th>Status</th> 
-                <th>Date</th>   
-                <th>Operations</th>     
-                </tr>
-            </thead>
-            <tbody>
+          <h3>Wildlife Complaints details</h3>
+          <br>
+          <form method="post">
+            <div style="display: flex; align-items: center;">
+              <div style="margin-right: 10px;">
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" class="form-control">
+              </div>
+              <div style="margin-right: 10px;">
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" class="form-control">
+              </div>        
+              <div style="margin-top: 22px;" >
+                <input type="submit" value="Filter" class="btn btn-primary">
+              </div>
+            </div>
+          </form>
+          <br>
+          <table class="table table-bordered">
+              <thead>
+                  <tr>
+                      <th>Complaint Id</th>
+                      <th>User Id</th>
+                      <th>Institution Id</th>
+                      <th>Description</th>
+                      <th>Location</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                  </tr>
+              </thead>
+              <tbody>
 
-                <?php
-                $sql="Select * from `complaints` WHERE institutionId=1";
-                $result=mysqli_query($conn,$sql); 
-                if($result){
-                while($row=mysqli_fetch_assoc($result)){
-                    $complaintId=$row['complaintId'];
-                    $userId=$row['userId'];
-                    $institutionId=$row['institutionId'];
-                    $description=$row['description'];
-                    $location=$row['location'];
-                    $status=$row['status'];
-                    $date=$row['date'];
-                    echo'<tr>
-                    <td scope="row">'.$complaintId.'</td>
-                    <td>'.$userId.'</td>
-                    <td>'.$institutionId.'</td>
-                    <td>'.$description.'</td>
-                    <td>'.$location.'</td>
-                    <td>'.$status.'</td>
-                    <td>'.$date.'</td>
-                    <td>
-                    <button class="btn btn-primary" name="edit"><a href="editComplaint.php?updateId='.$complaintId.'" class="text-light">EDIT</a></button>
-                    <button class="btn btn-danger" name="delete"><a href="deleteComplaint.php?deleteid='.$complaintId.'" class="text-light">DELETE</a></button>                  
-                    </td>                           
-                    </tr>';
-                }
-                
-                }
-                ?>
-            </tbody>
-        </table>
+                  <?php
+                  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                      $start_date = $_POST['start_date'];
+                      $end_date = $_POST['end_date'];
+
+                      $sql = "SELECT * FROM `complaints` WHERE institutionId = 1 AND date BETWEEN '$start_date' AND '$end_date'";
+                  } else {
+                      $sql = "SELECT * FROM `complaints` WHERE institutionId = 1";
+                  }
+
+                  $result = mysqli_query($con, $sql);
+                  if ($result) {
+                      while ($row = mysqli_fetch_assoc($result)) {
+                          $complaintId = $row['complaintId'];
+                          $userId = $row['userId'];
+                          $institutionId = $row['institutionId'];
+                          $description = $row['description'];
+                          $location = $row['location'];
+                          $status = $row['status'];
+                          $date = $row['date'];
+                          echo '<tr>
+                          <td scope="row">' . $complaintId . '</td>
+                          <td>' . $userId . '</td>
+                          <td>' . $institutionId . '</td>
+                          <td>' . $description . '</td>
+                          <td>' . $location . '</td>
+                          <td>' . $status . '</td>
+                          <td>' . $date . '</td>                          
+                          </tr>';
+                      }
+                  }
+                  ?>
+              </tbody>
+          </table>
       </div>    
             
     </div>
