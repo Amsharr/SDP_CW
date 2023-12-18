@@ -8,16 +8,16 @@
 				<div class="">
 					<div class="main-menu-header">
 						<?php
-$id=intval($_SESSION["id"]);
-$query=mysqli_query($con,"select * from users where id='$id'");
+$id=intval($_SESSION["userId"]);
+$query=mysqli_query($con,"select * from complainers where userId='$userId'");
 while($row=mysqli_fetch_array($query))
 {
 ?>
-						<img class="img-radius" src="../admin/assets/images/user/user.png" alt="User-Profile-Image">
+						<img class="img-radius" src="assets/images/user/user.png" alt="User-Profile-Image">
 						<div class="user-details">
 								
-							<span><?php echo  htmlentities($row['fullName']);?></span>
-							<div id="more-details"><?php echo  htmlentities($row['userEmail']);?><i class="fa fa-chevron-down m-l-5"></i></div>
+							<span><?php echo  htmlentities($row['firstName']);?></span>
+							<div id="more-details"><?php echo  htmlentities($row['email']);?><i class="fa fa-chevron-down m-l-5"></i></div>
 						</div><?php } ?>
 					</div>
 					<div class="collapse" id="nav-user-link">
