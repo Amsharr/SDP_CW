@@ -8,8 +8,8 @@ if(isset($_POST['submit']))
     $address = $_POST['address'];
     $contactNo = $_POST['contactNo'];
     $email = $_POST['email'];
-    $username = md5($_POST['username']);
-    $password = $_POST['password'];
+    $username = ($_POST['username']);
+    $password = md5($_POST['password']);
 
     // Check if email already exists
     $checkEmailQuery = mysqli_prepare($con, "SELECT COUNT(*) FROM complainers WHERE email = ?");
