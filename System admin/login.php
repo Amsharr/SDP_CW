@@ -5,14 +5,14 @@ include('../Config/connection.php');
 if(isset($_POST['submit']))
 {
    $username=$_POST['username'];
-   $password=md5($_POST['password']);
-$query=mysqli_query($con,"SELECT userId,firstName, lastName FROM complainers WHERE username='$username' and password='$password'");
+   $password=$_POST['password'];
+$query=mysqli_query($con,"SELECT systemAdminId  FROM systemadmin WHERE username='$username' and password='$password'");
 $num=mysqli_fetch_array($query);
 //If Login Suceesfull
 if($num>0)
 {
 $_SESSION['login']=$_POST['username'];
-$_SESSION['userId']=$num['userId'];
+$_SESSION['officerId']=$num['officerId'];
 $_SESSION['username']=$num['name'];
 echo "<script>alert('Login Successful');</script>";
 

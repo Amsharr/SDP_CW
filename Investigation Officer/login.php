@@ -73,7 +73,7 @@ exit();
 		          
 					</div></form>
 		
-		                <i class="fa fa-home" aria-hidden="true"><a class="" href="../index.php">
+		                <i class="fa fa-home" aria-hidden="true"><a class="" href="../index.html">
 		                    Back Home
 		                </a></i>
 		            
