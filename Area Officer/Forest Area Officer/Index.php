@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 include('../../Config/connection.php');
-
+?>
 
 <!doctype html>
 <html lang="en">

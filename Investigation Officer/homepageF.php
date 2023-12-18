@@ -38,7 +38,7 @@
         <div class="col py-3">
           <h3>Complaints assigned to me</h3>
           <br>
-          <h4>Wildlife complaints</h4>
+          <h4>Forest complaints</h4>
         <br>
         <table class="table table-bordered">
             <thead>
@@ -75,12 +75,12 @@
                                 <td>' . $date . '</td>
                                 <td style="display: flex; justify-content: space-between; align-items: center;">' . $status . '
                                     <button class="btn btn-primary" name="edit">
-                                        <a href="changeStatusW.php?updateId=' . $id . '" class="text-light" style="text-decoration: none;">Change</a>
+                                        <a href="changeStatusF.php?updateId=' . $id . '" class="text-light" style="text-decoration: none;">Change</a>
                                     </button>
                                 </td>
                                 <td>' . $remarks . '
                                     <button class="btn btn-primary" name="edit">
-                                        <a href="changeRemarksW.php?updateId=' . $id . '" class="text-light" style="text-decoration: none;">Change</a>
+                                        <a href="changeRemarksF.php?updateId=' . $id . '" class="text-light" style="text-decoration: none;">Change</a>
                                     </button>
                                 </td>                         
                             </tr>';
