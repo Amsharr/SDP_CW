@@ -76,7 +76,7 @@ if(isset($_POST['submit']))
     <!-- [ auth-signin ] start -->
     <div class="auth-wrapper">
         <div class="auth-content text-center">
-		<h4>Complaint management system <hr /><span style="color:#fff;"> User Login</span></h4>
+		
             <h4> <hr /><span style="color:#fff;">User Registration</span></h4>
             <hr />
             <div class="card borderless">
