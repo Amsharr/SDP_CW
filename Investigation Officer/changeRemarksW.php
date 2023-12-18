@@ -1,24 +1,32 @@
 <?php
-	require('C:/xampp/htdocs/SDP_CW/Config/connection.php');
-    $id=$_GET['updateId'];
+    require('C:/xampp/htdocs/SDP_CW/Config/connection.php');
+    $id = $_GET['updateId'];
 
-    $sql="SELECT * from `currentcomplaints` where complaintId=$id";
-    $result=mysqli_query($con,$sql);
-    $row=mysqli_fetch_assoc($result);
-    $status=$row['status'];
+    $sql = "SELECT * FROM `currentcomplaints` WHERE complaintId = ?";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+    $investigatorRemarks = $row['investigatorRemarks'];
 
-    //edit data 
-	  if(isset($_POST["submit"])){
-    $status=$_POST['status'];
+    // edit data 
+    if (isset($_POST["submit"])) {
+        $investigatorRemarks = $_POST['investigatorRemarks'];
 
-    $query ="UPDATE `currentcomplaints` set complaintId=$id,status='$status' where complaintId=$id";
-    mysqli_query($con, $query);
-    echo '<script>
-    window.location.href ="homepage.php";
-    alert("Updated successfully")        
-    </script>';
-	}
+        $query = "UPDATE `currentcomplaints` SET investigatorRemarks=? WHERE complaintId = ?";
+        $stmt = mysqli_prepare($con, $query);
+        mysqli_stmt_bind_param($stmt, "si", $investigatorRemarks, $id);
+        mysqli_stmt_execute($stmt);
+
+        echo '<script>
+            window.location.href = "homepageW.php";
+            alert("Updated successfully");
+        </script>';
+    }
 ?>
+
+
 
 <!doctype html>
 <html lang="en">
@@ -31,11 +39,15 @@
    
   </head>
   <nav class="navbar bg-success" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Complaint Management System</a>      
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Complaint Management System</a>      
+      <div class="ml-auto">
+        <div class="dropdown mt-3" style="margin-bottom: 10px;">                        
+            <a class="btn btn-warning" href="login.php" role="button"><i class="fa-solid fa-arrow-right"></i> <span class="ms-1 d-none d-sm-inline">Logout</span></a>
+        </div> 
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
   <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
@@ -57,13 +69,8 @@
             <form method="post">
                     <div class="container">                    
                     <div class="mb-3">
-                      <label>Status:</label>
-                    <select class="form-select" name="status" required>
-                        <option selected >Select status</option>
-                        <option value="Open" <?php echo ($status == 'Open') ? 'selected' : ''; ?>>Open</option>
-                        <option value="In progress" <?php echo ($status == 'In progress') ? 'selected' : ''; ?>>In progress</option>
-                        <option value="Completed" <?php echo ($status == 'Completed') ? 'selected' : ''; ?>>Completed</option>
-                      </select>
+                    <label>Remarks:</label>
+                      <input type="text" name="investigatorRemarks" class="form-control" required placeholder="max 40 characters" maxlength="45" value="<?php echo $investigatorRemarks;?>" >
                     </div>
                     <!-- update button  -->
                     <div>
