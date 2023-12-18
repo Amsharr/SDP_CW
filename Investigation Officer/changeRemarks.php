@@ -3,7 +3,7 @@
     $id = $_GET['updateId'];
 
     $sql = "SELECT * FROM `currentcomplaints` WHERE complaintId = ?";
-    $stmt = mysqli_prepare($conn, $sql);
+    $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -15,7 +15,7 @@
         $investigatorRemarks = $_POST['investigatorRemarks'];
 
         $query = "UPDATE `currentcomplaints` SET investigatorRemarks=? WHERE complaintId = ?";
-        $stmt = mysqli_prepare($conn, $query);
+        $stmt = mysqli_prepare($con, $query);
         mysqli_stmt_bind_param($stmt, "si", $investigatorRemarks, $id);
         mysqli_stmt_execute($stmt);
 

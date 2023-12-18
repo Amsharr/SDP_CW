@@ -9,11 +9,15 @@
     <link rel="stylesheet" href="../CSS/systemAdmin/homepage.css">
   </head>
   <nav class="navbar bg-success" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Complaint Managment System</a>      
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Complaint Management System</a>      
+      <div class="ml-auto">
+        <div class="dropdown mt-3" style="margin-bottom: 10px;">                        
+            <a class="btn btn-warning" href="login.php" role="button"><i class="fa-solid fa-arrow-right"></i> <span class="ms-1 d-none d-sm-inline">Logout</span></a>
+        </div> 
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
   <body >
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 

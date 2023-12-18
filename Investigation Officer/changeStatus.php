@@ -3,7 +3,7 @@
     $id=$_GET['updateId'];
 
     $sql="SELECT * from `currentcomplaints` where complaintId=$id";
-    $result=mysqli_query($conn,$sql);
+    $result=mysqli_query($con,$sql);
     $row=mysqli_fetch_assoc($result);
     $status=$row['status'];
 
@@ -12,7 +12,7 @@
     $status=$_POST['status'];
 
     $query ="UPDATE `currentcomplaints` set complaintId=$id,status='$status' where complaintId=$id";
-    mysqli_query($conn, $query);
+    mysqli_query($con, $query);
     echo '<script>
     window.location.href ="homepage.php";
     alert("Updated successfully")        

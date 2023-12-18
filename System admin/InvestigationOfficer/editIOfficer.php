@@ -3,7 +3,7 @@
     $id=$_GET['updateId'];
 
     $sql="SELECT * from `investigationofficers` where officerId=$id";
-    $result=mysqli_query($conn,$sql);
+    $result=mysqli_query($con,$sql);
     $row=mysqli_fetch_assoc($result);
     $institutionId=$row['institutionId'];
     $firstName=$row['firstName'];
@@ -24,7 +24,7 @@
     $password=$_POST['password'];
 
 		$query ="UPDATE `investigationofficers` set officerId=$id, institutionId='$institutionId',firstName='$firstName',lastName='$lastName',position='$position',contactNo='$contactNo',username='$username',password='$password' where officerId=$id";
-		mysqli_query($conn, $query);
+		mysqli_query($con, $query);
 		echo '<script>
         window.location.href ="viewInvestigationOfficers.php";
         alert("Updated successfully")        
@@ -43,11 +43,15 @@
    
   </head>
   <nav class="navbar bg-success" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Complaint Management System</a>      
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Complaint Management System</a>      
+      <div class="ml-auto">
+        <div class="dropdown mt-3" style="margin-bottom: 10px;">                        
+            <a class="btn btn-warning" href="../login.php" role="button"><i class="fa-solid fa-arrow-right"></i> <span class="ms-1 d-none d-sm-inline">Logout</span></a>
+        </div> 
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
   <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
