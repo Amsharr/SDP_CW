@@ -5,8 +5,8 @@ include('../Config/connection.php');
 if(isset($_POST['submit']))
 {
    $username=$_POST['username'];
-   $password=$_POST['password'];
-$query=mysqli_query($con,"SELECT officerId ,firstName, lastName FROM areaofficers WHERE username='$username' and password='$password'");
+   $password=md5($_POST['password']);
+$query=mysqli_query($con,"SELECT officerId ,firstName, lastName FROM areaOfficers WHERE username='$username' and password='$password'");
 $num=mysqli_fetch_array($query);
 //If Login Suceesfull
 if($num>0)
@@ -28,6 +28,9 @@ exit();
 
 ?>
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +45,7 @@ exit();
 <!-- [ auth-signin ] start -->
 <div class="auth-wrapper">
 	<div class="auth-content text-center">
-		<h4>Complaint management system <hr /><span style="color:#fff;"> User Login</span></h4>
+		<h4>Complaint management system <hr /><span style="color:#fff;"> Area Officer Login</span></h4>
 		<div class="card borderless">
 			<div class="row align-items-center ">
 				<div class="col-md-12">
@@ -51,6 +54,16 @@ exit();
 					<div class="card-body">
 						<h4 class="mb-3 f-w-400">Signin</h4>
 						<hr>
+
+					<div class="form-group">
+    
+    <select name="institutionId" class="form-control" required>
+        <option value="1">Wildlife</option>
+        <option value="2">Forest</option>
+    </select>
+</div>			  
+
+
 						<div class="form-group mb-3">
 							
 							<input type="text" name="username" id="username" class="form-control" onBlur="emailAvailability()" required placeholder="username">
@@ -64,12 +77,6 @@ exit();
 						<hr>
 						<p class="mb-2 text-muted">Forgot password? <a href="reset-password.php" class="f-w-400">Reset</a></p>
 
-								<div class="registration">
-		                Don't have an account yet?<br/><br/>
-		                <a class="badge badge-primary" href="registration.php">
-		                    Create an account
-		                </a>
-		            </div>
 		          
 					</div></form>
 		

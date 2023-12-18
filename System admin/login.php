@@ -42,7 +42,7 @@ exit();
 <!-- [ auth-signin ] start -->
 <div class="auth-wrapper">
 	<div class="auth-content text-center">
-		<h4>Complaint management system <hr /><span style="color:#fff;"> User Login</span></h4>
+		<h4>Complaint management system <hr /><span style="color:#fff;"> Admin Login</span></h4>
 		<div class="card borderless">
 			<div class="row align-items-center ">
 				<div class="col-md-12">
@@ -62,14 +62,9 @@ exit();
 						
 						<button class="btn btn-block btn-primary mb-4"  type="submit" name="submit">Signin</button>
 						<hr>
-						<p class="mb-2 text-muted">Forgot password? <a href="reset-password.php" class="f-w-400">Reset</a></p>
+						
 
-								<div class="registration">
-		                Don't have an account yet?<br/><br/>
-		                <a class="badge badge-primary" href="registration.php">
-		                    Create an account
-		                </a>
-		            </div>
+							
 		          
 					</div></form>
 		

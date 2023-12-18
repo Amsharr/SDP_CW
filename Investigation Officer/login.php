@@ -5,7 +5,7 @@ include('../Config/connection.php');
 if(isset($_POST['submit']))
 {
    $username=$_POST['username'];
-   $password=$_POST['password'];
+   $password=md5($_POST['password']);
 $query=mysqli_query($con,"SELECT officerId ,firstName, lastName FROM investigationofficers WHERE username='$username' and password='$password'");
 $num=mysqli_fetch_array($query);
 //If Login Suceesfull
@@ -42,7 +42,7 @@ exit();
 <!-- [ auth-signin ] start -->
 <div class="auth-wrapper">
 	<div class="auth-content text-center">
-		<h4>Complaint management system <hr /><span style="color:#fff;"> User Login</span></h4>
+		<h4>Complaint management system <hr /><span style="color:#fff;"> Investigatior officers Login</span></h4>
 		<div class="card borderless">
 			<div class="row align-items-center ">
 				<div class="col-md-12">
@@ -64,12 +64,7 @@ exit();
 						<hr>
 						<p class="mb-2 text-muted">Forgot password? <a href="reset-password.php" class="f-w-400">Reset</a></p>
 
-								<div class="registration">
-		                Don't have an account yet?<br/><br/>
-		                <a class="badge badge-primary" href="registration.php">
-		                    Create an account
-		                </a>
-		            </div>
+						
 		          
 					</div></form>
 		
