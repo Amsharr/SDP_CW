@@ -13,11 +13,15 @@
    
   </head>
   <nav class="navbar bg-success" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Complaint Management System</a>      
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Complaint Management System</a>      
+      <div class="ml-auto">
+        <div class="dropdown mt-3" style="margin-bottom: 10px;">                        
+            <a class="btn btn-warning" href="../login.php" role="button"><i class="fa-solid fa-arrow-right"></i> <span class="ms-1 d-none d-sm-inline">Logout</span></a>
+        </div> 
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
   <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
@@ -83,7 +87,7 @@
 
                 <?php
                 $sql="Select * from `complainers`";
-                $result=mysqli_query($conn,$sql);
+                $result=mysqli_query($con,$sql);
                 if($result){
                 while($row=mysqli_fetch_assoc($result)){
                     $id=$row['userId'];
