@@ -76,7 +76,7 @@ include('../../Config/connection.php');
                             </button>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="user-profile.php"><span class="ms-1 d-none d-sm-inline">Profile</span></a></li>
-                              <li><a class="dropdown-item" href="../../index.html"><span class="ms-1 d-none d-sm-inline">Logout</span></a></li>
+                              <li><a class="dropdown-item" href="../login.php"><span class="ms-1 d-none d-sm-inline">Logout</span></a></li>
                           </div>
                     </ul>
                     <hr>
