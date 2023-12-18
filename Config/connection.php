@@ -1,12 +1,12 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $db_name = "cms";
-
-    $conn = new mysqli($servername, $username, $password, $db_name, 3306);
-    if($conn->connect_error){
-        die("connection failed".$conn->connect_error);
-    }
-    echo "";
+define('DB_SERVER','localhost');
+define('DB_USER','root');
+define('DB_PASS' ,'');
+define('DB_NAME', 'cms_db');
+$con = mysqli_connect(DB_SERVER,DB_USER,DB_PASS,DB_NAME);
+// Check connection
+if (mysqli_connect_errno())
+{
+ echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
 ?>
