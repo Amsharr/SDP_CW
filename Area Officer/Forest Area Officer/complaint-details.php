@@ -1,6 +1,8 @@
 <?php
+session_start();
+error_reporting(0);
+include('../../Config/connection.php');
 
-include('../Config/connection.php');
 
 ?>
 <!doctype html>
@@ -15,7 +17,7 @@ include('../Config/connection.php');
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/systemAdmin/homepage.css">
+    <link rel="stylesheet" href="../../CSS/systemAdmin/homepage.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
@@ -92,7 +94,7 @@ include('../Config/connection.php');
                             </button>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="user-profile.php"><span class="ms-1 d-none d-sm-inline">Profile</span></a></li>
-                              <li><a class="dropdown-item" href="../index.html"><span class="ms-1 d-none d-sm-inline">Logout</span></a></li>
+                              <li><a class="dropdown-item" href="../../index.html"><span class="ms-1 d-none d-sm-inline">Logout</span></a></li>
                           </div>
                     </ul>
                     <hr>

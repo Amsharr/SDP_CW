@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../Config/connection.php');
+include('../../Config/connection.php');
 ?>
 <script language="javascript" type="text/javascript">
     function f2() {

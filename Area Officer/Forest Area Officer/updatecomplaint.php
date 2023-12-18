@@ -1,6 +1,7 @@
 <?php
-
-include('../Config/connection.php');
+session_start();
+error_reporting(0);
+include('../../Config/connection.php');
 
 if (isset($_POST['update'])) {
     $complaintnumber = $_GET['cid'];

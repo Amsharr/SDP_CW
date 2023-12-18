@@ -1,3 +1,7 @@
+<?php
+session_start();
+error_reporting(0);
+include('../../Config/connection.php');
 
 
 <!doctype html>
@@ -8,7 +12,7 @@
     <title>Admin dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/systemAdmin/homepage.css">
+    <link rel="stylesheet" href="../../CSS/systemAdmin/homepage.css">
     <link rel="stylesheet" href="assets/css/style.css">
   
   </head>
@@ -54,7 +58,7 @@
                             </button>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="user-profile.php"><span class="ms-1 d-none d-sm-inline">Profile</span></a></li>
-                              <li><a class="dropdown-item" href="../index.html"><span class="ms-1 d-none d-sm-inline">Logout</span></a></li>
+                              <li><a class="dropdown-item" href="../../index.html"><span class="ms-1 d-none d-sm-inline">Logout</span></a></li>
                           </div>     
                       </ul>                
                       <hr>
@@ -65,7 +69,7 @@
                       <h1>Dashboard</h1>
                         <div class="dashboardItems">
                             <div class="card" style="width: 18rem;">
-                                <img src="../img/systemAdmin/Forest.jpg" class="card-img-top" alt="wildlife image">
+                                <img src="../../img/systemAdmin/Forest.jpg" class="card-img-top" alt="wildlife image">
                                 <div class="card-body">
                                     <h5 class="card-title">Forest Complaints</h5>
                                     <p class="card-text"> Click on the below button to view the complaints for the Forest Institution</p>
@@ -75,7 +79,7 @@
                         </div>
                         <div class="dashboardItems">
                             <div class="card" style="width: 18rem;">
-                                <img src="../img/systemAdmin/users.jpg" class="card-img-top" alt="Forest image">
+                                <img src="../../img/systemAdmin/users.jpg" class="card-img-top" alt="Forest image">
                                 <div class="card-body">
                                     <h5 class="card-title">Assigned Complaints</h5>
                                     <p class="card-text">Click on the below button to view the assigned complaints for the investigator officers.</p>

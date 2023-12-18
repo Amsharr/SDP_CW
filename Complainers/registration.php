@@ -37,6 +37,7 @@ if(isset($_POST['submit']))
         mysqli_stmt_close($query);
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +73,17 @@ if(isset($_POST['submit']))
         }
     </script>
 </head>
+<script>
+    document.getElementById('password').addEventListener('input', function () {
+        var passwordInput = this.value;
+
+        if (passwordInput.length < 8) {
+            this.setCustomValidity('Password must be at least 8 characters long');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+</script>
 <body>
     <!-- [ auth-signin ] start -->
     <div class="auth-wrapper">
@@ -104,8 +116,9 @@ if(isset($_POST['submit']))
                                     <input type="text" class="form-control" placeholder="Username" required="required" name="username"><br >
                                 </div>
                                 <div class="form-group mb-3">
-                                    <input type="password" class="form-control" placeholder="Password" required="required" name="password"><br >
-                                </div>
+    <input type="password" class="form-control" placeholder="Password" required="required" name="password" id="password">
+    <small id="passwordHelp" class="form-text text-muted">Minimum 8 characters</small>
+</div>
                                 <button class="btn btn-block btn-primary mb-4"  type="submit" name="submit">Register</button>
                                 <hr>
                             </div>

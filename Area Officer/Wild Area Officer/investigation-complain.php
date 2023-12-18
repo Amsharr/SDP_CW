@@ -1,5 +1,8 @@
 <?php
-include('../Config/connection.php');
+session_start();
+error_reporting(0);
+include('../../Config/connection.php');
+
 
 if (isset($_GET['del']) && $_GET['del'] == 'delete' && isset($_GET['cid'])) {
     $complaintIdToDelete = $_GET['cid'];
@@ -33,7 +36,7 @@ if (isset($_GET['del']) && $_GET['del'] == 'delete' && isset($_GET['cid'])) {
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/systemAdmin/homepage.css">
+    <link rel="stylesheet" href="../../CSS/systemAdmin/homepage.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- flatpickr CSS -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -104,7 +107,7 @@ if (isset($_GET['del']) && $_GET['del'] == 'delete' && isset($_GET['cid'])) {
                             </button>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="user-profile.php"><span class="ms-1 d-none d-sm-inline">Profile</span></a></li>
-                              <li><a class="dropdown-item" href="../index.html"><span class="ms-1 d-none d-sm-inline">Logout</span></a></li>
+                              <li><a class="dropdown-item" href="../../index.html"><span class="ms-1 d-none d-sm-inline">Logout</span></a></li>
                           </div>
                     </ul>
                     <hr>
