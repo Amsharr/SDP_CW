@@ -68,7 +68,7 @@ return true;
 						
 						<button class="btn btn-block btn-primary mb-4"  type="submit" name="resetpwd">Reset</button>
 						<hr>
-						<p class="mb-2 text-muted"><a href="index.php" class="btn btn-primary">Signin</a></p>
+						<p class="mb-2 text-muted"><a href="login.php" class="btn btn-primary">Signin</a></p>
 					
 					</div></form>
 				</div>
