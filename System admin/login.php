@@ -16,7 +16,7 @@ $_SESSION['officerId']=$num['officerId'];
 $_SESSION['username']=$num['name'];
 echo "<script>alert('Login Successful');</script>";
 
-echo "<script type='text/javascript'> document.location ='index.php'; </script>";
+echo "<script type='text/javascript'> document.location ='homepage.php'; </script>";
 }
 //If Login Failed
 else{

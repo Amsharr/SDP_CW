@@ -8,10 +8,10 @@
         $contactNo=$_POST['contactNo'];
         $position=$_POST['position'];                    
         $username=$_POST['username'];
-        $password=$_POST['password'];
+        $password=md5($_POST['password']);
 
 		$query = "INSERT INTO investigationofficers VALUES('', '$institutionId','$firstName', '$lastName', '$contactNo', '$position', '$username', '$password')";
-		mysqli_query($conn, $query);
+		mysqli_query($con, $query);
 		echo '<script>
       	window.location.href ="viewInvestigationOfficers.php";
         alert("Officer Account added")        

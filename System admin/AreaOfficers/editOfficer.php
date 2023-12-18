@@ -3,7 +3,7 @@
     $id=$_GET['updateId'];
 
     $sql="SELECT * from `areaofficers` where officerId=$id";
-    $result=mysqli_query($conn,$sql);
+    $result=mysqli_query($con,$sql);
     $row=mysqli_fetch_assoc($result);
     $institutionId=$row['institutionId'];
     $firstName=$row['firstName'];
@@ -24,7 +24,7 @@
     $password=$_POST['password'];
 
 		$query ="UPDATE `areaofficers` set officerId=$id, institutionId='$institutionId',firstName='$firstName',lastName='$lastName',position='$position',contactNo='$contactNo',username='$username',password='$password' where officerId=$id";
-		mysqli_query($conn, $query);
+		mysqli_query($con, $query);
 		echo '<script>
         window.location.href ="viewAreaOfficers.php";
         alert("Updated successfully")        

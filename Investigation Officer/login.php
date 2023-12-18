@@ -6,17 +6,26 @@ if(isset($_POST['submit']))
 {
    $username=$_POST['username'];
    $password=md5($_POST['password']);
-$query=mysqli_query($con,"SELECT officerId ,firstName, lastName FROM investigationofficers WHERE username='$username' and password='$password'");
+   $institutionId=$_POST['institutionId'];
+$query=mysqli_query($con,"SELECT officerId ,institutionId,firstName, lastName FROM investigationofficers WHERE username='$username' and password='$password'");
 $num=mysqli_fetch_array($query);
 //If Login Suceesfull
-if($num>0)
+if($num>0 && $institutionId==1)
 {
 $_SESSION['login']=$_POST['username'];
 $_SESSION['officerId']=$num['officerId'];
 $_SESSION['username']=$num['name'];
 echo "<script>alert('Login Successful');</script>";
 
-echo "<script type='text/javascript'> document.location ='index.php'; </script>";
+echo "<script type='text/javascript'> document.location ='homepageW.php'; </script>";
+}
+elseif($num> 0 && $institutionId== 2){
+$_SESSION['login']=$_POST['username'];
+$_SESSION['officerId']=$num['officerId'];
+$_SESSION['username']=$num['name'];
+echo "<script>alert('Login Successful');</script>";
+
+echo "<script type='text/javascript'> document.location ='homepageF.php'; </script>";	
 }
 //If Login Failed
 else{
@@ -52,7 +61,12 @@ exit();
 						<h4 class="mb-3 f-w-400">Signin</h4>
 						<hr>
 						<div class="form-group mb-3">
-							
+							<div class="mb-3">
+							<select name="institutionId" class="form-control" required>
+								<option value="1">Wildlife</option>
+								<option value="2">Forest</option>
+							</select>
+							</div>
 							<input type="text" name="username" id="username" class="form-control" onBlur="emailAvailability()" required placeholder="username">
 						</div>
 						<div class="form-group mb-4">
