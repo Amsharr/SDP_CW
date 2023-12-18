@@ -83,7 +83,7 @@
 
                 <?php
                 $sql="Select * from `areaofficers`";
-                $result=mysqli_query($conn,$sql);
+                $result=mysqli_query($con,$sql);
                 if($result){
                 while($row=mysqli_fetch_assoc($result)){
                     $id=$row['officerId'];

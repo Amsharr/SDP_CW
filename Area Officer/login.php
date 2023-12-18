@@ -6,17 +6,27 @@ if(isset($_POST['submit']))
 {
    $username=$_POST['username'];
    $password=md5($_POST['password']);
-$query=mysqli_query($con,"SELECT officerId ,firstName, lastName FROM areaOfficers WHERE username='$username' and password='$password'");
-$num=mysqli_fetch_array($query);
-//If Login Suceesfull
-if($num>0)
+   $institutionId=$_POST['institutionId'];
+	$query=mysqli_query($con,"SELECT officerId ,institutionId,firstName, lastName FROM areaOfficers WHERE username='$username' and password='$password'");
+	$num=mysqli_fetch_array($query);
+
+//If institution is wildlife and  Login Succesfull
+if($num>0 && $institutionId==1)
 {
 $_SESSION['login']=$_POST['username'];
 $_SESSION['officerId']=$num['officerId'];
 $_SESSION['username']=$num['name'];
 echo "<script>alert('Login Successful');</script>";
 
-echo "<script type='text/javascript'> document.location ='index.php'; </script>";
+echo "<script type='text/javascript'> document.location ='Wild Area Officer/Index.php'; </script>";
+} //If institution is forest and  Login Succesfull
+elseif($num> 0 && $institutionId== 2){
+	$_SESSION['login']=$_POST['username'];
+	$_SESSION['officerId']=$num['officerId'];
+	$_SESSION['username']=$num['name'];
+	echo "<script>alert('Login Successful');</script>";
+
+	echo "<script type='text/javascript'> document.location ='Forest Area Officer/index.php'; </script>";
 }
 //If Login Failed
 else{
@@ -57,11 +67,11 @@ exit();
 
 					<div class="form-group">
     
-    <select name="institutionId" class="form-control" required>
-        <option value="1">Wildlife</option>
-        <option value="2">Forest</option>
-    </select>
-</div>			  
+						<select name="institutionId" class="form-control" required>
+							<option value="1">Wildlife</option>
+							<option value="2">Forest</option>
+						</select>
+					</div>			  
 
 
 						<div class="form-group mb-3">
