@@ -59,6 +59,11 @@ include('../../Config/connection.php');
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
+                        <div class="">
+                            <button class="btn btn-secondary" type="button">
+                              <i class="fa-solid fa-id-card-clip"></i><a class="" href="index.php"> <span class="ms-1 d-none d-sm-inline">Dashboard</span></a>
+                            </button>
+                          </div> 
                         <div class="dropdown mt-3">
                             <button class="btn btn-secondary dropdown-toggle" type="button"
                                 data-bs-toggle="dropdown">
