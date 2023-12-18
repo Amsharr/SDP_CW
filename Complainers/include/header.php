@@ -3,7 +3,7 @@
 			
 				<div class="m-header">
 					<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
-					<a href="dashboard.php" class="b-brand">
+					<a href="index.php" class="b-brand">
 						<!-- ========   change your logo hear   ============ -->
 						<strong>Complaint Management</strong>
 					</a>
@@ -31,14 +31,13 @@ $name=$row['firstName'];
 
 ?>
 										<span> <?php echo $name; ?></span>
-										<a href="logout.php" class="dud-logout" title="Logout">
+										<a href="../index.html" class="dud-logout" title="Logout">
 											<i class="feather icon-log-out"></i>
 										</a>
 									</div>
 									<ul class="pro-body">
 										<li><a href="profile.php" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-										<li><a href="setting.php" class="dropdown-item"><i class="feather icon-mail"></i> Settings</a></li>
-										<li><a href="logout.php" class="dropdown-item"><i class="feather icon-lock"></i> Logout</a></li>
+										<li><a href="../index.html" class="dropdown-item"><i class="feather icon-lock"></i> Logout</a></li>
 									</ul>
 								</div>
 							</div>

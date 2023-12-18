@@ -6,7 +6,7 @@ if(strlen($_SESSION['userId'])==0)
 	{	
 header('location:index.php');
 }
-else{
+
 	?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +37,7 @@ else{
                             <h5 class="m-b-10">Dashboard Analytics</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="dashboard.php"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="index.php"><i class="feather icon-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#!">Dashboard Analytics</a></li>
                         </ul>
                     </div>
@@ -70,26 +70,9 @@ $totcom=mysqli_num_rows($query5);
                 </div>
                 <!-- widget-success-card end -->
             </div>
-              <div class="col-md-12 col-xl-6">
-                
-                <!-- widget-success-card start -->
-                <div class="card flat-card bg-danger">
-                    <div class="row-table">
-                        <div class="col-sm-4 card-body">
-                            <i class="fas fa-file"></i>
-                        </div>
-                        <div class="col-sm-9">
-<?php 
-$query5=mysqli_query($con,"select complaintId from complaints where userId='$userId' and status is null");
-$newcom=mysqli_num_rows($query5);
-?>
-                            <h4><?php echo $newcom;?></h4>
-                            <h6>Pending Complaints</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- widget-success-card end -->
-            </div>
+
+
+              
               <div class="col-md-12 col-xl-6">
                 
                 <!-- widget-success-card start -->
@@ -148,4 +131,3 @@ $closedcom=mysqli_num_rows($query5);
 </body>
 
 </html>
-<?php } ?>
