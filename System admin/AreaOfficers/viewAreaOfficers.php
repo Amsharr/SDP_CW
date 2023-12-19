@@ -69,6 +69,17 @@
             </a>            
         </div>
         <br>
+        <form method="post">
+            <div style="display: flex; align-items: center;">
+              <div style="margin-right: 10px;">
+                <input type="number" id="officerId" name="officerId" class="form-control" placeholder="Enter officer Id" >
+              </div>
+              <div>
+                <input type="submit" value="Filter" class="btn btn-primary">
+              </div>
+            </div>
+          </form>
+        <br>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -86,7 +97,19 @@
             <tbody>
 
                 <?php
-                $sql="Select * from `areaofficers`";
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                  $officerId = $_POST['officerId'];
+
+                  if (!empty($officerId)) {
+                      $sql = "SELECT * FROM `areaofficers` WHERE officerId = '$officerId'";
+                  } else {
+                      $sql = "SELECT * FROM `areaofficers`";
+                  }
+                  
+              } else {
+                  $sql="Select * from `areaofficers`";
+              }                
+                
                 $result=mysqli_query($con,$sql);
                 if($result){
                 while($row=mysqli_fetch_assoc($result)){
