@@ -131,7 +131,7 @@
                     <td>'.$position.'</td>
                     <td>'.$username.'</td>
                     <td>'.str_repeat('*', strlen($password)).'</td>
-                    <td>
+                    <td style="display: inline-flex;" >
                     <button class="btn btn-primary" name="edit"><a href="editOfficer.php?updateId='.$id.'" class="text-light">EDIT</a></button>
                     <button class="btn btn-danger" name="delete"><a href="deleteOfficer.php?deleteid='.$id.'" class="text-light">DELETE</a></button>                  
                     </td>                           
