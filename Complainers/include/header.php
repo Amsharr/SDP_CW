@@ -42,7 +42,7 @@ $name=$row['firstName'];
 
 ?>
 										<span> <?php echo $name; ?></span>
-										<a href="index.php" class="dud-logout" title="Logout">
+										<a href="login.php" class="dud-logout" title="Logout">
 											<i class="feather icon-log-out"></i>
 										</a>
 									</div>
