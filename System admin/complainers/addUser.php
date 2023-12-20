@@ -8,9 +8,11 @@
     $contactNo=$_POST['contactNo'];
     $email=$_POST['email'];
     $username=$_POST['username'];
-    $password=$_POST['password'];
+    $password=md5($_POST['password']);
 
-		$query = "INSERT INTO complainers VALUES('', '$firstName', '$lastName', '$address','$contactNo', '$email', '$username', '$password')";
+		$query = "INSERT INTO complainers (firstName, lastName, address, contactNo, email, username, password) 
+          VALUES('$firstName', '$lastName', '$address', '$contactNo', '$email', '$username', '$password')";
+
 		mysqli_query($con, $query);
 		echo '<script>
       	window.location.href ="viewComplainers.php";

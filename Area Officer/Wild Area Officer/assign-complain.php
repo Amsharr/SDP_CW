@@ -173,7 +173,7 @@ if (isset($_POST['submit'])) {
                                             <label for="officer">Investigator Officer</label>
                                             <select name="investigationofficers" class="form-control" required>
                                                 <option value="">Select Officer</option>
-                                                <?php $query = mysqli_query($con, "select * from investigationofficers where instituitionId = 1");
+                                                <?php $query = mysqli_query($con, "select * from investigationofficers where institutionId = 1");
                                                 while ($row = mysqli_fetch_array($query)) {
                                                 ?>
                                                     <option value="<?php echo $row['officerId']; ?>"><?php echo $row['firstName']; ?></option>
