@@ -97,3 +97,10 @@ FROM
 JOIN
     complaints c ON cc.complaintId = c.complaintId;
 
+-- add credentials for system admin 
+INSERT INTO systemAdmin (systemAdminId, username, password)
+VALUES (1, 'admin', '123');
+
+-- add institutions
+INSERT INTO institutions (institutionId, type) VALUES (1, 'Wildlife');
+INSERT INTO institutions (institutionId, type) VALUES (2, 'Forest');
