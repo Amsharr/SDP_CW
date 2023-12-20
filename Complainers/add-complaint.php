@@ -1,71 +1,57 @@
 <?php
 session_start();
 include('../Config/connection.php');
-error_reporting(0);
-if(strlen($_SESSION['userId'])==0)
-    {   
-header('location:index.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+if (!isset($_SESSION['userId']) || empty($_SESSION['userId'])) {
+    header('location:index.php');
 }
 
+$userId = $_SESSION['userId'];
+if (isset($_POST["submit"])) {
+    // $userId = $_SESSION['userId'];
+    $institutionId = $_POST['institutionId'];
+    $description = mysqli_real_escape_string($con, $_POST['description']);
+    $location = mysqli_real_escape_string($con, $_POST['location']);
+    $date = $_POST['date'];
 
-if(isset($_POST["submit"])){ 
-    $complaintId=$_POST['complaintId'];
-    $userId=$_POST['userId'];
-    $institutionId=$_POST['institutionId'];
-    $description=$_POST['description'];
-    $location=$_POST['location'];
-    $complaintFile=$_FILES['complaintFile']["name"];
+    // Check if the userId and institutionId exist in the referenced tables
+    $userCheckQuery = "SELECT * FROM complainers WHERE userId = '$userId'";
+    $institutionCheckQuery = "SELECT * FROM institutions WHERE institutionId = '$institutionId'";
 
-    $status=$_POST['status'];
-    $date=$_POST['date'];
+    $userCheckResult = mysqli_query($con, $userCheckQuery);
+    $institutionCheckResult = mysqli_query($con, $institutionCheckQuery);
 
-		
+    if ($userCheckResult && $institutionCheckResult && mysqli_num_rows($userCheckResult) > 0 && mysqli_num_rows($institutionCheckResult) > 0) {
+        // Insert data into the complaints table
+        $query = "INSERT INTO complaints (userId, institutionId, description, location, status, date) 
+                  VALUES ('$userId', '$institutionId', '$description', '$location', 'open', '$date')";
 
+        $result = mysqli_query($con, $query);
 
-// get the image extension
-$extension = substr($complaintFile,strlen($complaintFile)-4,strlen($complaintFile));
+        if ($result) {
+            // Get the last inserted complaintId
+            $lastComplaintId = mysqli_insert_id($con);
 
-// allowed extensions
-$allowed_extensions = array(".jpg","jpeg",".png",".gif",".pdf",".PDF",".doc","docx");
-// Validation for allowed extensions .in_array() function searches an array for a specific value.
-if(!in_array($extension,$allowed_extensions))
-{
-echo "<script>alert('Invalid format. Only jpg / jpeg/ png /gif format allowed');</script>";
+            echo '<script>
+                    alert("Your complaint has been successfully filled, and your complaint number is ' . $lastComplaintId . '");
+                    window.location.href = "complaint-history.php";
+                  </script>';
+        } else {
+            echo '<script>alert("Error: ' . mysqli_error($con) . '");</script>';
+        }
+    } else {
+        echo '<script>alert("Invalid userId or institutionId");</script>';
+    }
 }
-else
-{
-//rename the image file
-$compfilenew=md5($complaintFile).$extension;
-
-// Code for move image into directory
-move_uploaded_file($_FILES["complaintFile"]["tmp_name"],"complaintdocs/".$compfilenew);
-
-$query = "INSERT INTO complaints VALUES('$complaintId', '$userId'.'$institutionId', '$description', '$location', '$complaintFile','$status', '$date')";
-		mysqli_query($conn, $query);
-if (!$query) {
-    die("Query failed: " . mysqli_error($con));
-}
-
-
-
-// code for show complaint number
-$sql=mysqli_query($con,"select complaintId from complaints  order by complaintId desc limit 1");
-while($row=mysqli_fetch_array($sql))
-{
- $cmpn=$row['complaintId'];
-}
-$complainno=$cmpn;
-echo '<script> alert("Your complain has been successfully filled and your complaintno is  "+"'.$complainno.'")</script>';
-}
-}
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title>CMS||Register Complaint</title>
-   
 
     <!-- vendor css -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -83,113 +69,79 @@ echo '<script> alert("Your complain has been successfully filled and your compla
             });
         });
     </script>
-   
-<script>
-    
-</script>
 </head>
-<body class="">
-	<?php include('include/sidebar.php');?>
-	<!-- [ navigation menu ] end -->
-	<!-- [ Header ] start -->
-	<?php include('include/header.php');?>
 
-<!-- [ Main Content ] start -->
-<section class="pcoded-main-container">
-    <div class="pcoded-content">
-        <!-- [ breadcrumb ] start -->
-        <div class="page-header">
-            <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <div class="page-header-title">
-                            <h5 class="m-b-10">New Complaint</h5>
+<body class="">
+    <?php include('include/sidebar.php'); ?>
+    <?php include('include/header.php'); ?>
+
+    <section class="pcoded-main-container">
+        <div class="pcoded-content">
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">New Complaint</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.php"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="add-complaint.php">Add Complaint</a></li>
+                            </ul>
                         </div>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.php"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="add-complaint.php">Add Complaint</a></li>
-                            
-                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- [ breadcrumb ] end -->
-        <!-- [ Main Content ] start -->
-        <div class="row">
-          
-            <!-- [ form-element ] start -->
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Add Complaint</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-10">
-                            	
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Add Complaint</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-10">
                                     <br />
-                              <form method="post" name="complaint" enctype="multipart/form-data">
-                                         <div class="form-group">
+                                    <form method="post" name="complaint" enctype="multipart/form-data">
+                                        <div class="form-group">
                                             <label for=""></label>
-                                            <select class="form-select" aria-label="Default select example" required name="institutionId" >
-                          <option selected disabled>Select an instituition</option>
-                          <option value="1">Wildlife</option>
-                          <option value="2">Forest</option>
-                      </select>
+                                            <select class="form-select" aria-label="Default select example" required name="institutionId">
+                                                <option selected disabled>Select an institution</option>
+                                                <option value="1">Wildlife</option>
+                                                <option value="2">Forest</option>
+                                            </select>
                                         </div>
 
-                                    <div class="form-group">
-                                        <label for="">Complaint Details (max 2000 words)</label>
-                                        <textarea  name="description" required="required" cols="10" rows="10" class="form-control" maxlength="2000"></textarea>
-                                        
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="">Complaint Details </label>
+                                            <textarea name="description" required="required" cols="10" rows="10" class="form-control" maxlength="2000"></textarea>
+                                        </div>
 
-                                    <div class="form-group">
-                                        <label for="">Location</label>
-                                       <input type="text" name="location" required="required" value="" required="" class="form-control">
-                                        
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Complaint Related (any file)</label>
-                                        <input type="file" name="complaintFile" class="form-control" value="">
-                                        
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="">Location</label>
+                                            <input type="text" name="location" required="required" value="" required="" class="form-control">
+                                        </div>
 
-                                     <div class="form-group">
+                                        <div class="form-group">
                                             <label for="date">Date</label>
                                             <input type="text" class="form-control datepicker" name="date" required="required">
                                         </div>
-                                     
-                                     
-                                     
-                                     
-                                    <button type="submit" class="btn  btn-primary" name="submit">Submit</button>
-                                </form>
+
+                                        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                                    </form>
+                                </div>
                             </div>
-                           
                         </div>
-             
-                   
                     </div>
                 </div>
-          
             </div>
-            <!-- [ form-element ] end -->
         </div>
-        <!-- [ Main Content ] end -->
-
-    </div>
-</section>
-
+    </section>
 
     <!-- Required Js -->
     <script src="assets/js/vendor-all.min.js"></script>
     <script src="assets/js/plugins/bootstrap.min.js"></script>
-
-
-
-
 </body>
 
 </html>

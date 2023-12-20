@@ -82,8 +82,9 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
                                 <thead>
                                         <tr><th>#</th>
 											<th>Complaint No</th>
-											<th>Complainant Name</th>
-											<th>Reg Date</th>
+											<th>Name</th>
+											<th> Description</th>
+                                            <th>Date</th>
 											<th>Status</th>
 											<th>Action</th>
 										</tr>
@@ -100,6 +101,7 @@ while($row=mysqli_fetch_array($query))
                                             <td><?php echo htmlentities($cnt);?></td>
                                             <td><?php echo htmlentities($row['complaintId']);?></td>
                                             <td><?php echo htmlentities($row['name']);?></td>
+                                                <td><?php echo htmlentities($row['description']);?></td>
                                             <td> <?php echo htmlentities($row['date']);?></td>
                                              <td>
                                                 <?php $status=$row['status'];

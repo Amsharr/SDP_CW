@@ -29,6 +29,8 @@ if(isset($_POST['submit']))
 
         if (mysqli_stmt_execute($query)) {
             echo "<script>alert('Registration successful. Now You can login');</script>";
+            echo "<script type='text/javascript'> document.location ='index.php'; </script>";
+            
             echo "<script>closeModalAndRedirect();</script>";
         } else {
             echo "<script>alert('Registration failed. Please try again.');</script>";

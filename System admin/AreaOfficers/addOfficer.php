@@ -1,5 +1,5 @@
 <?php
-	require('C:/xampp/htdocs/SDP_CW/Config/connection.php');
+	require('../../Config/connection.php');
 
 	if(isset($_POST["submit"])){ 
         $institutionId=$_POST['institutionId'];

@@ -1,3 +1,14 @@
+
+<?php
+// session_start();
+error_reporting(0);
+include('../../Config/connection.php');
+if (!isset($_SESSION['userId']) || empty($_SESSION['userId'])) {
+    header('location:index.php');
+}
+
+$userId = $_SESSION['userId'];
+?>
 <header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark">
 		
 			
@@ -31,13 +42,13 @@ $name=$row['firstName'];
 
 ?>
 										<span> <?php echo $name; ?></span>
-										<a href="../index.html" class="dud-logout" title="Logout">
+										<a href="index.php" class="dud-logout" title="Logout">
 											<i class="feather icon-log-out"></i>
 										</a>
 									</div>
 									<ul class="pro-body">
 										<li><a href="profile.php" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-										<li><a href="../index.html" class="dropdown-item"><i class="feather icon-lock"></i> Logout</a></li>
+										<li><a href="login.php" class="dropdown-item"><i class="feather icon-lock"></i> Logout</a></li>
 									</ul>
 								</div>
 							</div>

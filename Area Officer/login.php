@@ -1,42 +1,39 @@
 <?php
 session_start();
-error_reporting(0);
 include('../Config/connection.php');
-if(isset($_POST['submit']))
-{
-   $username=$_POST['username'];
-   $password=md5($_POST['password']);
-   $institutionId=$_POST['institutionId'];
-	$query=mysqli_query($con,"SELECT officerId ,institutionId,firstName, lastName FROM areaOfficers WHERE username='$username' and password='$password'");
-	$num=mysqli_fetch_array($query);
 
-//If institution is wildlife and  Login Succesfull
-if($num>0 && $institutionId==1)
-{
-$_SESSION['login']=$_POST['username'];
-$_SESSION['officerId']=$num['officerId'];
-$_SESSION['username']=$num['name'];
-echo "<script>alert('Login Successful');</script>";
+if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+    $institutionId = $_POST['institutionId'];
 
-echo "<script type='text/javascript'> document.location ='Wild Area Officer/Index.php'; </script>";
-} //If institution is forest and  Login Succesfull
-elseif($num> 0 && $institutionId== 2){
-	$_SESSION['login']=$_POST['username'];
-	$_SESSION['officerId']=$num['officerId'];
-	$_SESSION['username']=$num['name'];
-	echo "<script>alert('Login Successful');</script>";
+    $query = mysqli_query($con, "SELECT officerId, institutionId, firstName, lastName FROM areaOfficers WHERE username='$username' AND password='$password'");
+    $num = mysqli_fetch_array($query);
 
-	echo "<script type='text/javascript'> document.location ='Forest Area Officer/index.php'; </script>";
+    // If login is successful
+    if ($num > 0) {
+        $_SESSION['login'] = $_POST['username'];
+        $_SESSION['officerId'] = $num['officerId'];
+        $_SESSION['username'] = $num['firstName'] . ' ' . $num['lastName'];
+
+        // Redirect based on institutionId
+        if ($institutionId == 1) {
+            echo "<script>alert('Login Successful');</script>";
+            echo "<script type='text/javascript'> document.location ='Wild Area Officer/Index.php'; </script>";
+        } elseif ($institutionId == 2) {
+            echo "<script>alert('Login Successful');</script>";
+            echo "<script type='text/javascript'> document.location ='Forest Area Officer/index.php'; </script>";
+        } else {
+            echo "<script>alert('Invalid institutionId');</script>";
+        }
+    } else {
+        echo "<script>alert('Invalid login details');</script>";
+        echo "<script type='text/javascript'> document.location ='login.php'; </script>";
+        exit();
+    }
 }
-//If Login Failed
-else{
-    echo "<script>alert('Invalid login details');</script>";
-    echo "<script type='text/javascript'> document.location ='login.php'; </script>";
-exit();
-}
-}
-
 ?>
+
 
 
 

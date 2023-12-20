@@ -1,5 +1,5 @@
 <?php
-    include('C:/xampp/htdocs/SDP_CW/Config/connection.php');
+    include('../../Config/connection.php');
 ?>
 
 <!doctype html>
