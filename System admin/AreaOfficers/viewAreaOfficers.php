@@ -69,6 +69,17 @@
             </a>            
         </div>
         <br>
+        <form method="post">
+            <div style="display: flex; align-items: center;">
+              <div style="margin-right: 10px;">
+                <input type="number" id="officerId" name="officerId" class="form-control" placeholder="Enter officer Id" >
+              </div>
+              <div>
+                <input type="submit" value="Filter" class="btn btn-primary">
+              </div>
+            </div>
+          </form>
+        <br>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -86,7 +97,19 @@
             <tbody>
 
                 <?php
-                $sql="Select * from `areaofficers`";
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                  $officerId = $_POST['officerId'];
+
+                  if (!empty($officerId)) {
+                      $sql = "SELECT * FROM `areaofficers` WHERE officerId = '$officerId'";
+                  } else {
+                      $sql = "SELECT * FROM `areaofficers`";
+                  }
+                  
+              } else {
+                  $sql="Select * from `areaofficers`";
+              }                
+                
                 $result=mysqli_query($con,$sql);
                 if($result){
                 while($row=mysqli_fetch_assoc($result)){
@@ -108,7 +131,7 @@
                     <td>'.$position.'</td>
                     <td>'.$username.'</td>
                     <td>'.str_repeat('*', strlen($password)).'</td>
-                    <td>
+                    <td style="display: inline-flex;" >
                     <button class="btn btn-primary" name="edit"><a href="editOfficer.php?updateId='.$id.'" class="text-light">EDIT</a></button>
                     <button class="btn btn-danger" name="delete"><a href="deleteOfficer.php?deleteid='.$id.'" class="text-light">DELETE</a></button>                  
                     </td>                           

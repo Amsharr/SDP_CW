@@ -68,6 +68,19 @@
                 <button name="Add" type="Add" class="btn btn-success">Add user</button>
             </a>            
         </div>
+        <br>
+        <div>
+        <form method="post">
+            <div style="display: flex; align-items: center;">
+              <div style="margin-right: 10px;">
+                <input type="number" id="userId" name="userId" class="form-control" placeholder="Enter UserId" >
+              </div>
+              <div>
+                <input type="submit" value="Filter" class="btn btn-primary">
+              </div>
+            </div>
+          </form>
+        </div>
         <br>          
         <table class="table table-bordered">
             <thead>
@@ -85,8 +98,23 @@
             </thead>
             <tbody>
 
-                <?php
-                $sql="Select * from `complainers`";
+            <?php
+              if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                  $userId = $_POST['userId'];
+
+                  // Check if $userId is empty
+                  if (!empty($userId)) {
+                      $sql = "SELECT * FROM `complainers` WHERE userID = '$userId'";
+                  } else {
+                      // If $userId is empty, fetch all records
+                      $sql = "SELECT * FROM `complainers`";
+                  }
+                  
+              } else {
+                  // If no form is submitted, display all records
+                  $sql = "SELECT * FROM `complainers`";
+              }
+                
                 $result=mysqli_query($con,$sql);
                 if($result){
                 while($row=mysqli_fetch_assoc($result)){
