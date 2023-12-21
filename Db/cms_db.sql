@@ -26,7 +26,7 @@ CREATE TABLE complaints (
     location VARCHAR(255) NOT NULL,
     status VARCHAR(255) DEFAULT 'Open',
     date DATE NOT NULL,
-    FOREIGN KEY (userId) REFERENCES complainers(userId),
+    FOREIGN KEY (userId) REFERENCES complainers(userId) ON DELETE CASCADE,
     FOREIGN KEY (institutionId) REFERENCES institutions(institutionId)
 );
 
@@ -63,6 +63,7 @@ CREATE TABLE systemAdmin (
     password VARCHAR(255) NOT NULL
 );
 
+-- Create Table: currentComplaints
 CREATE TABLE currentComplaints (
     complaintId INT,
     officerId INT,
@@ -70,9 +71,10 @@ CREATE TABLE currentComplaints (
     date DATE NOT NULL,
     status VARCHAR(255) DEFAULT 'Open',
     investigatorRemarks TEXT,
-    FOREIGN KEY (complaintId) REFERENCES complaints(complaintId),
-    FOREIGN KEY (officerId) REFERENCES investigationOfficers(officerId)
+    FOREIGN KEY (complaintId) REFERENCES complaints(complaintId) ON DELETE CASCADE,
+    FOREIGN KEY (officerId) REFERENCES investigationOfficers(officerId) ON DELETE CASCADE
 );
+
 
 -- Create Table: complaintRemark
 CREATE TABLE complaintRemark (
